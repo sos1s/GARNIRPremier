@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GARNIR PREMIER | NAVIGATION UPDATE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+
+        :root {
+            --accent: #FF0033;
+            --bg-dark: #0f0a0d;
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #FFFFFF;
+            --text-dim: #999;
+            --accent-yellow: #F8FF00;
+            --blue-live: #00f0ff;
+            --white-live: #ffffff; 
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Play', sans-serif !important; }
+        
+        /* Эффект появления */
+	@keyframes fadeIn {
+    		from { opacity: 0; }
+    		to { opacity: 1; }
+}
+
+body {
+    opacity: 0; /* Сначала скрываем */
+    animation: fadeIn 0.5s ease-out forwards; /* Плавно проявляем */
+    
+    /* Твои старые настройки фона */
+    margin: 0;
+    min-height: 100vh;
+    background: #000 url('bgsait.png') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+}
+
+        /* --- 1. ОБНОВЛЕННАЯ ШАПКА --- */
+        nav {
+            height: 70px; /* Немного увеличил высоту для солидности */
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            border-bottom: 1px solid var(--glass-border);
+            position: sticky; 
+            top: 0; 
+            z-index: 1000;
+        }
+        
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 40px; /* Отступ между лого и меню */
+        }
+
+        .my-logo { height: 60px; width: auto; cursor: pointer; }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            opacity: 0.8;
+        }
+
+        .nav-link:hover {
+            color: var(--accent);
+            opacity: 1;
+        }
+
+        .nav-right {
+            color: var(--text-dim);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- 2. ЛИНИЯ МАТЧЕЙ --- */
+        .match-bar {
+            background: rgba(15, 10, 13, 0.5);
+            backdrop-filter: blur(10px); 
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            overflow-x: auto;
+            scrollbar-width: none;
+            padding-top: 35px; 
+            padding-bottom: 15px;
+            position: relative;
+            z-index: 10;
+            cursor: grab;
+            user-select: none;
+        }
+        .match-bar:active { cursor: grabbing; }
+        .match-bar::-webkit-scrollbar { display: none; }
+
+        .match-divider {
+            width: 1px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 0 20px;
+            flex-shrink: 0;
+        }
+
+        .match-group {
+            display: flex;
+            padding: 0 10px;
+            gap: 15px;
+            align-items: flex-end;
+            flex-shrink: 0;
+        }
+
+        .match-item {
+            min-width: 230px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .date-label {
+            position: absolute;
+            top: -24px;
+            left: 0;
+            font-size: 11px;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .m-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--text-dim);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .m-body {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            height: 68px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .m-body:hover {
+            border-color: var(--white-live); 
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+        }
+
+        .m-teams { display: flex; flex-direction: column; gap: 6px; }
+        .m-team { font-size: 13px; font-weight: 700; color: #fff; }
+
+        .m-score {
+            background: #000;
+            border-radius: 4px;
+            padding: 5px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            min-width: 38px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .s-val { font-size: 13px; font-weight: 700; color: #444; }
+        .s-val.active { color: var(--white-live); }
+
+        .m-footer {
+            font-size: 9px;
+            text-align: center;
+            color: rgba(255,255,255,0.3);
+            margin-top: 8px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        /* --- 3. СТРУКТУРА КОНТЕНТА --- */
+        .main-container {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 280px 1fr 300px; 
+            gap: 25px;
+            align-items: start;
+        }
+
+        .teams-ranking {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .ranking-title {
+            font-size: 14px; font-weight: 700; text-transform: uppercase;
+            margin-bottom: 20px; border-left: 3px solid var(--accent); padding-left: 10px;
+        }
+        .rank-item {
+            display: flex; align-items: center; padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .rank-number { font-weight: 700; color: var(--accent); width: 25px; }
+        .rank-name { flex: 1; font-size: 13px; font-weight: 700; }
+        .rank-points { font-size: 11px; color: var(--text-dim); }
+
+        .news-item {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            overflow: hidden;
+            transition: 0.3s;
+            text-decoration: none;
+            color: inherit;
+        }
+        .news-item:hover { border-color: var(--white-live); background: rgba(0, 0, 0, 0.6); }
+        .news-img { width: 240px; background-size: cover; background-position: center; min-height: 160px; }
+        .news-content { padding: 20px; flex: 1; }
+        .news-category { color: var(--accent); font-size: 10px; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; display: block; }
+        .news-content h2 { font-size: 18px; margin-bottom: 10px; }
+        .news-content p { color: var(--text-dim); font-size: 14px; line-height: 1.5; }
+
+        .ad-sidebar {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .ad-label {
+            font-size: 9px; color: var(--text-dim); text-transform: uppercase;
+            padding: 8px 15px; background: rgba(255, 255, 255, 0.03);
+            letter-spacing: 1px; border-bottom: 1px solid var(--glass-border);
+        }
+        .ad-image {
+            width: 100%; height: 400px;
+            background: url('ТВОЕ_ФОТО.png') no-repeat center center;
+            background-size: cover; cursor: pointer;
+        }
+        .ad-text { padding: 15px; text-align: center; }
+        .ad-text h4 { font-size: 14px; text-transform: uppercase; color: var(--accent); margin-bottom: 5px; }
+        .ad-text p { font-size: 11px; color: var(--text-dim); }
+
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-left">
+        <img src="logo.png" class="my-logo">
+        <div class="nav-menu">
+            <a href="index.html" class="nav-link">Главная</a>
+            <a href="tournaments.html" class="nav-link">Турниры</a> <a href="#" class="nav-link">Партнеры</a>
+        </div>
+    </div>
+    <div class="nav-right">GARNIR PREMIER • DASHBOARD</div>
+</nav>
+<div class="match-bar" id="matchBar">
+    <div class="match-group">
+        <div class="match-item"><div class="date-label">Mar 27</div><div class="m-header"><span>Group A</span> <span>19:00</span></div><div class="m-body"><div class="m-teams"><div class="m-team">Neko Team</div><div class="m-team">Nexor</div></div><div class="m-score"><span class="s-val active">2</span><span class="s-val active">0</span></div></div><div class="m-footer">UB Final</div></div>
+        <div class="match-item"><div class="date-label">Mar 10</div><div class="m-header"><span>Playoffs</span> <span>17:00</span></div><div class="m-body"><div class="m-teams"><div class="m-team">Parivision</div><div class="m-team">Falcons</div></div><div class="m-score"><span class="s-val">-</span><span class="s-val">-</span></div></div><div class="m-footer">Quarter Final 1</div></div>
+        <div class="match-item"><div class="date-label">Mar 26</div><div class="m-header"><span>Group B</span> <span>19:00</span></div><div class="m-body"><div class="m-teams"><div class="m-team">Vitality</div><div class="m-team">G2</div></div><div class="m-score"><span class="s-val active">2</span><span class="s-val active">1</span></div></div><div class="m-footer">Group Stage</div></div>
+        <div class="match-item"><div class="date-label">Mar 11</div><div class="m-header"><span>Playoffs</span> <span>20:00</span></div><div class="m-body"><div class="m-teams"><div class="m-team">NAVI</div><div class="m-team">FaZe</div></div><div class="m-score"><span class="s-val">-</span><span class="s-val">-</span></div></div><div class="m-footer">Semi Final</div></div>
+    </div>
+
+    <div class="match-divider"></div>
+
+    <div class="match-group">
+        <div class="match-item"><div class="date-label">Mar 28</div><div class="m-header"><span>Group A</span> <span>12:00</span></div><div class="m-body"><div class="m-teams"><div class="m-team">Spirit</div><div class="m-team">MOUZ</div></div><div class="m-score"><span class="s-val">0</span><span class="s-val">0</span></div></div><div class="m-footer">Opening</div></div>
+        <div class="match-item"><div class="date-label">Mar 29</div><div class="m-header"><span>Group A</span> <span>15:00</span></div><div class="m-body"><div class="m-teams"><div class="m-team">Cloud9</div><div class="m-team">Astralis</div></div><div class="m-score"><span class="s-val">-</span><span class="s-val">-</span></div></div><div class="m-footer">Group Match</div></div>
+        <div class="match-item"><div class="date-label">Mar 30</div><div class="m-header"><span>Group C</span> <span>18:00</span></div><div class="m-body"><div class="m-teams"><div class="m-team">Liquid</div><div class="m-team">Complexity</div></div><div class="m-score"><span class="s-val">1</span><span class="s-val">1</span></div></div><div class="m-footer">Live</div></div>
+        <div class="match-item"><div class="date-label">Mar 31</div><div class="m-header"><span>Group C</span> <span>21:00</span></div><div class="m-body"><div class="m-teams"><div class="m-team">Virtus.pro</div><div class="m-team">Heroic</div></div><div class="m-score"><span class="s-val">-</span><span class="s-val">-</span></div></div><div class="m-footer">Upcoming</div></div>
+    </div>
+</div>
+
+<div class="main-container">
+    <aside class="teams-ranking">
+        <div class="ranking-title">Рейтинг команд</div>
+        <div class="rank-item"><div class="rank-number">1</div><div class="rank-name">Eagles</div><div class="rank-points">40 pts</div></div>
+        <div class="rank-item"><div class="rank-number">2</div><div class="rank-name">Sigma United</div><div class="rank-points">40 pts</div></div>
+        <div class="rank-item"><div class="rank-number">3</div><div class="rank-name">Cay</div><div class="rank-points">40 pts</div></div>
+        <div class="rank-item"><div class="rank-number">4</div><div class="rank-name">L1</div><div class="rank-points">40 pts</div></div>
+        <div class="rank-item"><div class="rank-number">5</div><div class="rank-name">Vr1vave</div><div class="rank-points">20 pts</div></div>
+        <div class="rank-item"><div class="rank-number">6</div><div class="rank-name">One Alive</div><div class="rank-points">20 pts</div></div>
+        <div class="rank-item"><div class="rank-number">7</div><div class="rank-name">Neko Team</div><div class="rank-points">0 pts</div></div>
+    </aside>
+
+    <main>
+        <h2 style="margin-bottom: 20px; text-transform: uppercase; font-size: 18px;">Последние новости</h2>
+        <a href="#" class="news-item">
+            <div class="news-img" style="background-image: url('https://img.youtube.com/vi/6f5S_PAsN98/maxresdefault.jpg');"></div>
+            <div class="news-content">
+                <span class="news-category">Турниры</span>
+                <h2>НОВОСТЬ 1</h2>
+                <p>ТУТ САМА НОВОСТЬ</p>
+            </div>
+        </a>
+        <a href="#" class="news-item">
+            <div class="news-img" style="background-image: url('news_test.png');"></div>
+            <div class="news-content">
+                <span class="news-category" style="color: var(--blue-live);">Обновление</span>
+                <h2>Valve изменили экономику в CS2</h2>
+                <p>В сегодняшнем патче разработчики пересмотрели награды за проигранные раунды.</p>
+            </div>
+        </a>
+    </main>
+
+    <aside class="ad-sidebar">
+        <div class="ad-label">РЕКЛАМА</div>
+        <div class="ad-image"></div>
+        <div class="ad-text">
+            <h4>Твой заголовок</h4>
+            <p>Нажми для перехода.</p>
+        </div>
+    </aside>
+</div>
+
+<script>
+    const slider = document.getElementById('matchBar');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    slider.addEventListener('mousedown', (e) => {
+        isDown = true;
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+    });
+    slider.addEventListener('mouseleave', () => isDown = false);
+    slider.addEventListener('mouseup', () => isDown = false);
+    slider.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 2;
+        slider.scrollLeft = scrollLeft - walk;
+    });
+</script>
+
+</body>
+</html>
