@@ -8,13 +8,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-        /* CSS ВНУТРИ HTML */
         :root {
             --bg-white: #ffffff;
             --text-black: #000000;
             --accent-gray: #f4f4f4;
+            --status-gray: #555555;
             --font-main: 'Play', sans-serif;
-            /* Broaven oblique должен быть установлен в системе или подключен отдельно */
             --font-heading: 'Broaven oblique', 'Play', sans-serif;
         }
 
@@ -99,7 +98,7 @@
             margin-bottom: 10px;
         }
 
-        /* Остальные секции */
+        /* Заголовки */
         .section-title {
             font-family: var(--font-heading);
             font-size: 32px;
@@ -109,6 +108,7 @@
 
         .white { color: white; }
 
+        /* Новости */
         .news-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -121,6 +121,54 @@
             background: var(--accent-gray);
         }
 
+        /* Турниры */
+        .tournament-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .t-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px;
+            border: 1px solid #333;
+            color: white;
+            transition: 0.3s;
+        }
+
+        .t-item:hover {
+            border-color: #777;
+        }
+
+        .t-status {
+            background: white;
+            color: black;
+            padding: 3px 10px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-right: 15px;
+            text-transform: uppercase;
+        }
+
+        /* Стиль для завершенных турниров */
+        .t-status.ended {
+            background: var(--status-gray);
+            color: white;
+        }
+
+        .t-name {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .t-prize {
+            font-family: var(--font-heading);
+            font-size: 20px;
+        }
+
+        /* Рейтинг */
         .ranking-table {
             width: 100%;
             border-collapse: collapse;
@@ -132,24 +180,7 @@
             border-bottom: 1px solid #eee;
         }
 
-        .t-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 25px;
-            border: 1px solid #333;
-            color: white;
-            margin-bottom: 10px;
-        }
-
-        .t-status {
-            background: white;
-            color: black;
-            padding: 3px 10px;
-            font-size: 12px;
-            font-weight: bold;
-            margin-right: 15px;
-        }
-
+        /* Партнеры */
         .partner-logos {
             display: flex;
             justify-content: space-around;
@@ -203,8 +234,9 @@
         </section>
 
         <section id="tournaments" class="container bg-black">
-            <h2 class="section-title white">Текущие турниры</h2>
+            <h2 class="section-title white">Турниры</h2>
             <div class="tournament-list">
+                
                 <div class="t-item">
                     <div class="t-info">
                         <span class="t-status">Live</span>
@@ -212,17 +244,33 @@
                     </div>
                     <div class="t-prize">$50,000</div>
                 </div>
-            </div>
-        </section>
 
                 <div class="t-item">
                     <div class="t-info">
-                        <span class="t-status">Live</span>
-                        <span class="t-name">Garnir Premier аалЛАЛ</span>
+                        <span class="t-status ended">Ended</span>
+                        <span class="t-name">TGL S1</span>
                     </div>
-                    <div class="t-prize">$50,000</div>
+                    <div class="t-prize">$25,000</div>
                 </div>
-            </div>  
+
+                <div class="t-item">
+                    <div class="t-info">
+                        <span class="t-status ended">Ended</span>
+                        <span class="t-name">GRT 2026</span>
+                    </div>
+                    <div class="t-prize">$15,000</div>
+                </div>
+
+                <div class="t-item">
+                    <div class="t-info">
+                        <span class="t-status ended">Ended</span>
+                        <span class="t-name">Turnir GARNIR 1</span>
+                    </div>
+                    <div class="t-prize">$10,000</div>
+                </div>
+
+            </div>
+        </section>
 
         <section id="ranking" class="container">
             <h2 class="section-title">Мировой рейтинг GWE</h2>
