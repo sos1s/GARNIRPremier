@@ -4,14 +4,171 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Garnir World Esports | GWE</title>
-    <link rel="stylesheet" href="style.css">
+    
     <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* CSS ВНУТРИ HTML */
+        :root {
+            --bg-white: #ffffff;
+            --text-black: #000000;
+            --accent-gray: #f4f4f4;
+            --font-main: 'Play', sans-serif;
+            /* Broaven oblique должен быть установлен в системе или подключен отдельно */
+            --font-heading: 'Broaven oblique', 'Play', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-white);
+            color: var(--text-black);
+            line-height: 1.6;
+        }
+
+        .container {
+            padding: 80px 10%;
+            width: 100%;
+        }
+
+        .bg-black {
+            background-color: var(--text-black);
+        }
+
+        /* Навигация */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background: #fff;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-black);
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover { opacity: 0.6; }
+
+        /* Hero секция */
+        .hero {
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: 
+                linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                url('photo1.png') no-repeat center center / cover;
+            color: #fff;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(40px, 8vw, 80px);
+            margin-bottom: 10px;
+        }
+
+        /* Остальные секции */
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 32px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+        }
+
+        .white { color: white; }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .news-card {
+            padding: 30px;
+            border-left: 4px solid #000;
+            background: var(--accent-gray);
+        }
+
+        .ranking-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .ranking-table th, .ranking-table td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .t-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 25px;
+            border: 1px solid #333;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .t-status {
+            background: white;
+            color: black;
+            padding: 3px 10px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .partner-logos {
+            display: flex;
+            justify-content: space-around;
+            opacity: 0.4;
+        }
+
+        footer {
+            background: #000;
+            color: #fff;
+            padding: 60px 10%;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
     <nav class="navbar">
         <div class="logo">
-            <img src="logo.png" alt="GWE - Garnir World Esports Logo" class="logo-img">
+            <img src="logo.png" alt="GWE Logo" class="logo-img">
         </div>
         <ul class="nav-links">
             <li><a href="#news">Новости</a></li>
@@ -40,7 +197,7 @@
                 <article class="news-card">
                     <div class="news-date">09.04.2026</div>
                     <h3>Обновление регламента</h3>
-                    <p>Изменения в правилах выбора карт и технического тайм-аута.</p>
+                    <p>Изменения в правилах выбора карт.</p>
                 </article>
             </div>
         </section>
@@ -76,20 +233,17 @@
             </table>
         </section>
 
-        <section id="partners" class="container partners">
+        <section id="partners" class="container">
             <div class="partner-logos">
-                <div class="partner-item">WHYNOT.GAME</div>
-                <div class="partner-item">GUTS NEWS</div>
-                <div class="partner-item">SIGMA TURNIR</div>
+                <div class="partner-item">PARTNER 1</div>
+                <div class="partner-item">PARTNER 2</div>
+                <div class="partner-item">PARTNER 3</div>
             </div>
         </section>
     </main>
 
-    <footer id="regulations">
-        <div class="container footer-content">
-            <p>&copy; 2026 Garnir World Esports. Все права защищены.</p>
-            <a href="#" class="reg-link">Полный регламент турниров</a>
-        </div>
+    <footer>
+        <p>&copy; 2026 Garnir World Esports. Все права защищены.</p>
     </footer>
 
 </body>
