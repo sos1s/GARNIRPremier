@@ -3,153 +3,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GARNIR PREMIER | ТУРНИРЫ</title>
-    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
+    <title>GWE | Global Wrestling & Esports</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        html { scrollbar-gutter: stable; background-color: #000; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Play', sans-serif !important; }
-        
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        :root {
+            --primary: #ffed00; /* Желтый акцент как у EWC */
+            --bg-dark: #0b0b0b;
+            --card-bg: #1a1a1a;
+            --text-light: #ffffff;
+            --text-gray: #a0a0a0;
+        }
 
-        body { 
-            opacity: 0;
-            animation: fadeIn 0.5s ease-out forwards;
-            background: #000 url('img/bgsait.png') no-repeat center center fixed;
-            background-size: cover;
-            color: #fff;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
             overflow-x: hidden;
         }
 
-        /* ШАПКА: ЛОГО И МЕНЮ СЛЕВА */
+        /* Навигация */
         nav {
-            height: 70px; background: #000;
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 0 40px; border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-        .nav-left { display: flex; align-items: center; gap: 40px; }
-        .my-logo { height: 60px; cursor: pointer; }
-        .nav-menu { display: flex; gap: 30px; }
-        .nav-link { color: #fff; text-decoration: none; font-size: 14px; font-weight: 700; text-transform: uppercase; opacity: 0.8; transition: 0.3s; }
-        .nav-link:hover, .nav-link.active { color: #FF0033; opacity: 1; }
-        .nav-right { color: #999; font-size: 11px; font-weight: 700; text-transform: uppercase; }
-
-        /* КОНТЕЙНЕР НА ВСЮ ШИРИНУ */
-        .main-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background: rgba(0,0,0,0.8);
+            position: fixed;
             width: 100%;
-            margin: 40px 0;
-            padding: 0 40px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #333;
         }
 
-        .group-title {
-            font-size: 18px;
-            text-transform: uppercase;
-            font-weight: 700;
-            margin: 30px 0 15px 0;
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: var(--primary);
         }
 
-        /* КАРТОЧКА: ДЛИННАЯ, БЕЗ ТРЯСКИ */
-        .t-card {
-            background: rgba(22, 12, 18, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex; 
-            align-items: stretch; 
-            margin-bottom: 8px; 
-            height: 55px; 
+        .nav-links a {
+            color: white;
             text-decoration: none;
-            color: inherit;
+            margin-left: 30px;
+            text-transform: uppercase;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Главный баннер */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)), 
+                        url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80') center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 8vw, 100px);
+            text-transform: uppercase;
+            line-height: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .hero span {
+            color: var(--primary);
+        }
+
+        .btn {
+            padding: 15px 40px;
+            background: var(--primary);
+            color: black;
+            text-decoration: none;
+            font-weight: 800;
+            text-transform: uppercase;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+            background: white;
+        }
+
+        /* Секция турниров */
+        .tournaments {
+            padding: 80px 5%;
+        }
+
+        .section-title {
+            font-size: 32px;
+            margin-bottom: 40px;
+            border-left: 5px solid var(--primary);
+            padding-left: 15px;
+            text-transform: uppercase;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 4px;
             overflow: hidden;
-            border-radius: 8px;
-            width: 100%;
-            transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+            transition: 0.3s;
+            border: 1px solid #333;
         }
 
-        .t-card:hover { 
-            background: rgba(255, 255, 255, 0.07); 
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
-            /* transform удален - карта не двигается */
+        .card:hover {
+            border-color: var(--primary);
+            transform: translateY(-10px);
         }
 
-        .t-logo-box {
-            width: 160px; 
-            background: #000;
+        .card-img {
+            height: 200px;
+            background: #333;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .t-logo-box img { width: 100%; height: 100%; object-fit: cover; }
-
-        .t-content {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-            justify-content: space-between;
+            font-size: 40px;
+            color: var(--text-gray);
         }
 
-        .t-name { font-size: 13px; font-weight: 700; }
-
-        .t-right-side { display: flex; align-items: center; gap: 15px; }
-
-        .t-stats {
-            display: flex; align-items: center; gap: 8px;
-            font-size: 11px; color: #777; text-transform: uppercase;
+        .card-content {
+            padding: 20px;
         }
-        .dot { width: 3px; height: 3px; background: #444; border-radius: 50%; }
 
-        .t-date {
-            border: 1px solid #fff;
-            border-radius: 4px;
-            padding: 2px 10px;
-            font-size: 11px;
-            font-weight: 700;
-            min-width: 90px;
+        .card-tag {
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .card-title {
+            margin: 10px 0;
+            font-size: 20px;
+        }
+
+        footer {
+            padding: 50px 5%;
+            background: #050505;
             text-align: center;
+            border-top: 1px solid #222;
         }
 
-        .ongoing .t-date { border-color: #FF0033; color: #FF0033; }
+        .socials {
+            margin-bottom: 20px;
+        }
+
+        .socials i {
+            font-size: 24px;
+            margin: 0 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .socials i:hover {
+            color: var(--primary);
+        }
     </style>
 </head>
 <body>
 
-<nav>
-    <div class="nav-left">
-        <img src="img/logo.png" class="my-logo" onclick="location.href='index.html'">
-        <div class="nav-menu">
-            <a href="index.html" class="nav-link">Главная</a>
-            <a href="tournaments.html" class="nav-link active">Турниры</a> 
-            <a href="#" class="nav-link">Партнеры</a>
+    <nav>
+        <div class="logo">GWE<span>.</span></div>
+        <div class="nav-links">
+            <a href="#">Главная</a>
+            <a href="#">Турниры</a>
+            <a href="#">Новости</a>
+            <a href="#">Билеты</a>
         </div>
-    </div>
-    <div class="nav-right">GARNIR PREMIER • DASHBOARD</div>
-</nav>
+    </nav>
 
-<div class="main-container">
-    <div class="group-title">Ongoing</div>
-    <a href="#" class="t-card ongoing">
-        <div class="t-logo-box"><img src="img/t1_photo.png"></div>
-        <div class="t-content">
-            <div class="t-name">Turnir GARNIR 1</div>
-            <div class="t-right-side">
-                <div class="t-stats">16 Teams <div class="dot"></div> $1,100,000</div>
-                <div class="t-date">MAR 18 - 29</div>
+    <section class="hero">
+        <p style="text-transform: uppercase; letter-spacing: 5px; margin-bottom: 10px;">The Next Level of Gaming</p>
+        <h1>GWE WORLD <br><span>CHAMPIONSHIP</span></h1>
+        <br>
+        <a href="#" class="btn">Зарегистрироваться</a>
+    </section>
+
+    <section class="tournaments">
+        <h2 class="section-title">Текущие дисциплины</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="card-img"><i class="fas fa-gamepad"></i></div>
+                <div class="card-content">
+                    <span class="card-tag">Призовой фонд $50,000</span>
+                    <h3 class="card-title">Cyber Strike: GWE Open</h3>
+                    <p style="color: var(--text-gray); font-size: 14px;">Дата начала: 15 сентября 2026</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img"><i class="fas fa-trophy"></i></div>
+                <div class="card-content">
+                    <span class="card-tag">LIVE</span>
+                    <h3 class="card-title">Ultimate Battle Royale</h3>
+                    <p style="color: var(--text-gray); font-size: 14px;">Стадия: Финалы</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img"><i class="fas fa-headset"></i></div>
+                <div class="card-content">
+                    <span class="card-tag">Скоро</span>
+                    <h3 class="card-title">GWE Mobile Masters</h3>
+                    <p style="color: var(--text-gray); font-size: 14px;">Регистрация открыта</p>
+                </div>
             </div>
         </div>
-    </a>
+    </section>
 
-    <div class="group-title">Upcoming</div>
-    <a href="#" class="t-card">
-        <div class="t-logo-box"><img src="img/pgl_logo.png"></div>
-        <div class="t-content">
-            <div class="t-name">PGL Bucharest 2026</div>
-            <div class="t-right-side">
-                <div class="t-stats">16 Teams <div class="dot"></div> $625,000</div>
-                <div class="t-date">APR 03 - 11</div>
-            </div>
+    <footer>
+        <div class="socials">
+            <i class="fab fa-twitch"></i>
+            <i class="fab fa-youtube"></i>
+            <i class="fab fa-discord"></i>
+            <i class="fab fa-x-twitter"></i>
         </div>
-    </a>
-</div>
+        <p>&copy; 2026 GWE Tournaments. Все права защищены.</p>
+    </footer>
 
 </body>
 </html>
