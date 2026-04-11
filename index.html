@@ -2,176 +2,51 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>GWE | GLOBAL WRESTLING ESPORTS</title>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Play:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #ffffff;
-            --text: #000000;
-            --border: 5px solid #000000;
-        }
-
-        /* Искусственный Broaven Oblique на стероидах */
-        .broaven {
-            font-family: 'Anton', sans-serif;
-            text-transform: uppercase;
-            font-style: italic;
-            letter-spacing: -2px; /* Плотность как у Broaven */
-            line-height: 0.85;
-            display: inline-block;
-            transform: skewX(-8deg) scaleY(1.1); /* Доворачиваем наклон и вытягиваем высоту */
-        }
-
-        body {
-            margin: 0;
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Play', sans-serif;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* Навигация а-ля EWC */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 5%;
-            border-bottom: var(--border);
-        }
-
-        .logo {
-            font-size: 60px;
-            text-decoration: none;
-            color: black;
-        }
-
-        .nav-links a {
-            font-family: 'Play', sans-serif;
-            font-weight: 700;
-            text-decoration: none;
-            color: black;
-            margin-left: 30px;
-            text-transform: uppercase;
-            font-size: 14px;
-        }
-
-        /* Hero секция */
-        .hero {
-            padding: 80px 5%;
-            border-bottom: var(--border);
-            background-image: 
-                linear-gradient(to right, white 40%, transparent),
-                url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .hero h1 {
-            font-size: clamp(80px, 15vw, 180px);
-            margin: 0;
-        }
-
-        .hero p {
-            font-weight: 700;
-            font-size: 24px;
-            margin-top: 10px;
-            text-transform: uppercase;
-        }
-
-        /* Сетка турниров */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            min-height: 500px;
-        }
-
-        .tournament-item {
-            border-right: var(--border);
-            padding: 40px;
-            transition: 0.2s ease-in-out;
-            text-decoration: none;
-            color: black;
-        }
-
-        .tournament-item:last-child { border-right: none; }
-
-        .tournament-item:hover {
-            background: black;
-            color: white;
-        }
-
-        .tournament-item h2 {
-            font-size: 50px;
-            margin: 30px 0;
-        }
-
-        .tag {
-            border: 2px solid currentColor;
-            padding: 5px 10px;
-            font-weight: 700;
-            font-size: 12px;
-            text-transform: uppercase;
-        }
-
-        /* Кнопка */
-        .cta {
-            background: black;
-            color: white;
-            padding: 20px 50px;
-            font-size: 20px;
-            font-weight: 700;
-            text-transform: uppercase;
-            display: inline-block;
-            margin-top: 30px;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        .cta:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 0 #ccc;
-        }
-
-        @media (max-width: 1024px) {
-            .grid { grid-template-columns: 1fr; }
-            .tournament-item { border-right: none; border-bottom: var(--border); }
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GWE CS2 | Esports League</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <nav>
-        <a href="#" class="logo broaven">GWE</a>
-        <div class="nav-links">
-            <a href="#">Tournaments</a>
-            <a href="#">Schedule</a>
-            <a href="#">Media</a>
+    <nav class="side-nav">
+        <div class="logo">GWE</div>
+        <ul class="nav-links">
+            <li class="active"><i class="icon-home"></i><span>Home</span></li>
+            <li><i class="icon-trophy"></i><span>Tournaments</span></li>
+            <li><i class="icon-ticket"></i><span>Tickets</span></li>
+            <li><i class="icon-news"></i><span>News</span></li>
+        </ul>
+        <div class="nav-footer">
+            <button class="login-btn">Login</button>
         </div>
     </nav>
 
-    <section class="hero">
-        <h1 class="broaven">GLOBAL<br>WRESTLING</h1>
-        <p>This is where legends are made.</p>
-        <a href="#" class="cta">Register Team</a>
-    </section>
+    <main class="main-content">
+        <section class="hero">
+            <div class="overlay"></div>
+            <div class="hero-body">
+                <span class="date-badge">01 SEPTEMBER – 15 OCTOBER 2026</span>
+                <h1 class="main-title">GWE PREMIER</h1>
+                <p class="hero-desc">THE ULTIMATE CS2 BATTLEGROUND</p>
+                
+                <div class="countdown">
+                    <div class="time-block"><span>85</span><label>DAYS</label></div>
+                    <div class="time-block"><span>19</span><label>HOURS</label></div>
+                    <div class="time-block"><span>22</span><label>MINS</label></div>
+                    <div class="time-block"><span>32</span><label>SECS</label></div>
+                </div>
 
-    <div class="grid">
-        <a href="#" class="tournament-item">
-            <span class="tag">Live Now</span>
-            <h2 class="broaven">Heavyweight<br>Championship</h2>
-            <p>Prize: $50,000</p>
-        </a>
-        <a href="#" class="tournament-item">
-            <span class="tag">Coming Soon</span>
-            <h2 class="broaven">Cyber<br>Wrestlemania</h2>
-            <p>June 2026</p>
-        </a>
-        <a href="#" class="tournament-item">
-            <span class="tag">Open</span>
-            <h2 class="broaven">Underground<br>Series</h2>
-            <p>All regions allowed</p>
-        </a>
-    </div>
+                <button class="scroll-info">SCROLL FOR INFO ↓</button>
+            </div>
+        </section>
 
+        <section class="road-to">
+            <h2>Road to GWE 2026</h2>
+            <div class="progress-container">
+                <div class="progress-bar" style="width: 20%;">
+                    <span class="progress-text">20%</span>
+                </div>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
