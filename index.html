@@ -2,243 +2,176 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GWE | Global Wrestling & Esports</title>
-    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
+    <title>GWE | GLOBAL WRESTLING ESPORTS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Play:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Имитация Broaven, если файла нет локально */
-        @font-face {
-            font-family: 'Broaven';
-            src: url('fonts/Broaven-Oblique.woff2') format('woff2'); /* Укажи путь к файлу */
-            font-weight: bold;
-            font-style: italic;
-        }
-
         :root {
-            --bg-main: #ffffff;
-            --bg-dark: #000000;
-            --text-dark: #121212;
-            --text-light: #ffffff;
-            --accent: #000000;
-            --border-color: #e0e0e0;
+            --bg: #ffffff;
+            --text: #000000;
+            --border: 5px solid #000000;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* Искусственный Broaven Oblique на стероидах */
+        .broaven {
+            font-family: 'Anton', sans-serif;
+            text-transform: uppercase;
+            font-style: italic;
+            letter-spacing: -2px; /* Плотность как у Broaven */
+            line-height: 0.85;
+            display: inline-block;
+            transform: skewX(-8deg) scaleY(1.1); /* Доворачиваем наклон и вытягиваем высоту */
         }
 
         body {
-            background-color: var(--bg-main);
-            color: var(--text-dark);
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
             font-family: 'Play', sans-serif;
-            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Заголовки с использованием Broaven (с фолбеком на Impact) */
-        h1, h2, .logo {
-            font-family: 'Broaven', 'Impact', sans-serif;
-            text-transform: uppercase;
-            font-style: italic;
-            letter-spacing: -1px;
-        }
-
-        /* Навигация */
+        /* Навигация а-ля EWC */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 25px 5%;
-            background: white;
-            border-bottom: 2px solid var(--bg-dark);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            padding: 20px 5%;
+            border-bottom: var(--border);
         }
 
         .logo {
-            font-size: 32px;
-            color: var(--bg-dark);
+            font-size: 60px;
             text-decoration: none;
-        }
-
-        .nav-links a {
-            color: var(--text-dark);
-            text-decoration: none;
-            margin-left: 30px;
-            font-weight: 700;
-            font-size: 14px;
-            text-transform: uppercase;
-            transition: 0.2s;
-        }
-
-        .nav-links a:hover {
-            opacity: 0.6;
-        }
-
-        /* Главный экран */
-        .hero {
-            height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 0 5%;
-            background: linear-gradient(to right, white 40%, transparent), 
-                        url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&q=80') center/cover;
-            border-bottom: 5px solid var(--bg-dark);
-        }
-
-        .hero h1 {
-            font-size: clamp(50px, 10vw, 120px);
-            line-height: 0.85;
-            margin-bottom: 20px;
-            color: var(--bg-dark);
-        }
-
-        .btn-black {
-            background: var(--bg-dark);
-            color: white;
-            padding: 18px 45px;
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-            transition: 0.3s;
-            border: 2px solid var(--bg-dark);
-        }
-
-        .btn-black:hover {
-            background: white;
             color: black;
         }
 
-        /* Секция турниров */
-        .tournaments {
-            padding: 100px 5%;
+        .nav-links a {
+            font-family: 'Play', sans-serif;
+            font-weight: 700;
+            text-decoration: none;
+            color: black;
+            margin-left: 30px;
+            text-transform: uppercase;
+            font-size: 14px;
         }
 
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 50px;
-            border-bottom: 2px solid var(--bg-dark);
-            padding-bottom: 10px;
+        /* Hero секция */
+        .hero {
+            padding: 80px 5%;
+            border-bottom: var(--border);
+            background-image: 
+                linear-gradient(to right, white 40%, transparent),
+                url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070');
+            background-size: cover;
+            background-position: center;
         }
 
+        .hero h1 {
+            font-size: clamp(80px, 15vw, 180px);
+            margin: 0;
+        }
+
+        .hero p {
+            font-weight: 700;
+            font-size: 24px;
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+
+        /* Сетка турниров */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1px; /* Эффект тонких линий между карточками */
-            background: var(--border-color);
-            border: 1px solid var(--border-color);
+            grid-template-columns: repeat(3, 1fr);
+            min-height: 500px;
         }
 
-        .card {
-            background: white;
-            padding: 30px;
+        .tournament-item {
+            border-right: var(--border);
+            padding: 40px;
+            transition: 0.2s ease-in-out;
+            text-decoration: none;
+            color: black;
+        }
+
+        .tournament-item:last-child { border-right: none; }
+
+        .tournament-item:hover {
+            background: black;
+            color: white;
+        }
+
+        .tournament-item h2 {
+            font-size: 50px;
+            margin: 30px 0;
+        }
+
+        .tag {
+            border: 2px solid currentColor;
+            padding: 5px 10px;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        /* Кнопка */
+        .cta {
+            background: black;
+            color: white;
+            padding: 20px 50px;
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-top: 30px;
+            text-decoration: none;
             transition: 0.3s;
         }
 
-        .card:hover {
-            background: var(--bg-dark);
-            color: white;
+        .cta:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 0 #ccc;
         }
 
-        .card-date {
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .card-title {
-            font-size: 28px;
-            margin-bottom: 20px;
-            line-height: 1;
-        }
-
-        /* Футер */
-        footer {
-            background: var(--bg-dark);
-            color: white;
-            padding: 60px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .socials i {
-            font-size: 20px;
-            margin-right: 20px;
-            cursor: pointer;
-        }
-
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .hero h1 { font-size: 60px; }
+        @media (max-width: 1024px) {
+            .grid { grid-template-columns: 1fr; }
+            .tournament-item { border-right: none; border-bottom: var(--border); }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="#" class="logo">GWE</a>
+        <a href="#" class="logo broaven">GWE</a>
         <div class="nav-links">
             <a href="#">Tournaments</a>
             <a href="#">Schedule</a>
-            <a href="#">News</a>
-            <a href="#">Shop</a>
+            <a href="#">Media</a>
         </div>
     </nav>
 
     <section class="hero">
-        <h1>GLOBAL<br>WRESTLING<br>ESPORTS</h1>
-        <p style="max-width: 500px; margin-bottom: 30px; font-weight: bold; text-transform: uppercase;">
-            Новая эра соревнований. Присоединяйся к элите киберспорта.
-        </p>
-        <a href="#" class="btn-black">Участвовать</a>
+        <h1 class="broaven">GLOBAL<br>WRESTLING</h1>
+        <p>This is where legends are made.</p>
+        <a href="#" class="cta">Register Team</a>
     </section>
 
-    <section class="tournaments">
-        <div class="section-header">
-            <h2 style="font-size: 40px;">Active Events</h2>
-            <p>2026 Season</p>
-        </div>
-
-        <div class="grid">
-            <div class="card">
-                <span class="card-date">MAY 15-20</span>
-                <h3 class="card-title">GWE PRIME: <br>SUMMER SLAM</h3>
-                <p>Prize Pool: $25,000</p>
-            </div>
-            <div class="card">
-                <span class="card-date">JUNE 02</span>
-                <h3 class="card-title">OPEN QUALIFIER <br>ROUND 1</h3>
-                <p>Registration: Open</p>
-            </div>
-            <div class="card">
-                <span class="card-date">JULY 10</span>
-                <h3 class="card-title">CYBER RING <br>MASTERS</h3>
-                <p>Venue: Online</p>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div>
-            <p style="font-family: 'Broaven', sans-serif; font-size: 24px; font-style: italic;">GWE</p>
-            <p style="font-size: 12px; opacity: 0.5;">© 2026 All Rights Reserved.</p>
-        </div>
-        <div class="socials">
-            <i class="fab fa-instagram"></i>
-            <i class="fab fa-twitch"></i>
-            <i class="fab fa-discord"></i>
-        </div>
-    </footer>
+    <div class="grid">
+        <a href="#" class="tournament-item">
+            <span class="tag">Live Now</span>
+            <h2 class="broaven">Heavyweight<br>Championship</h2>
+            <p>Prize: $50,000</p>
+        </a>
+        <a href="#" class="tournament-item">
+            <span class="tag">Coming Soon</span>
+            <h2 class="broaven">Cyber<br>Wrestlemania</h2>
+            <p>June 2026</p>
+        </a>
+        <a href="#" class="tournament-item">
+            <span class="tag">Open</span>
+            <h2 class="broaven">Underground<br>Series</h2>
+            <p>All regions allowed</p>
+        </a>
+    </div>
 
 </body>
 </html>
