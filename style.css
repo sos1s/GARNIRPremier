@@ -3,7 +3,9 @@
     --text-black: #000000;
     --accent-gray: #f4f4f4;
     --font-main: 'Play', sans-serif;
-    --font-heading: 'Broaven oblique', 'Play', sans-serif; /* Резервный Play, если Broaven не загружен */
+    /* Убедитесь, что шрифт Broaven oblique подключен через @font-face, если вы используете его локально.
+       В противном случае будет использоваться резервный шрифт Play. */
+    --font-heading: 'Broaven oblique', 'Play', sans-serif;
 }
 
 * {
@@ -21,6 +23,7 @@ body {
 
 .container {
     padding: 80px 10%;
+    width: 100%;
 }
 
 .bg-black {
@@ -32,22 +35,24 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 10%;
+    padding: 10px 10%; /* Уменьшили вертикальный паддинг для компактности */
     border-bottom: 1px solid #eee;
     position: sticky;
     top: 0;
-    background: white;
+    background: rgba(255, 255, 255, 0.95); /* Полупрозрачный фон при скролле */
     z-index: 1000;
+    height: 80px; /* Фиксированная высота для навбара */
 }
 
 .logo {
-    font-family: var(--font-heading);
-    font-size: 24px;
-    font-weight: bold;
-    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
 }
 
-.logo span { color: #888; }
+.logo-img {
+    max-height: 60px; /* Ограничиваем высоту логотипа, чтобы он не ломал навбар */
+    width: auto; /* Сохраняем пропорции */
+}
 
 .nav-links {
     list-style: none;
@@ -67,21 +72,34 @@ body {
 
 .nav-links a:hover { opacity: 0.6; }
 
-/* Hero секция */
+/* Hero секция с фоновым изображением */
 .hero {
-    height: 60vh;
+    height: 70vh; /* Увеличили высоту для лучшего отображения картинки */
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
     text-align: center;
-    border-bottom: 1px solid #000;
+    /* Установка фонового изображения */
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)), /* Темный оверлей для читаемости текста */
+        url('photo1.png');
+    background-size: cover; /* Изображение покрывает всю площадь */
+    background-position: center; /* Центрирование изображения */
+    background-repeat: no-repeat;
+    color: white; /* Текст в Hero теперь всегда белый */
 }
 
 .hero h1 {
     font-family: var(--font-heading);
-    font-size: clamp(40px, 8vw, 80px);
+    font-size: clamp(40px, 8vw, 80px); /* Адаптивный размер шрифта */
     line-height: 1;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.hero p {
+    font-size: clamp(16px, 3vw, 24px);
+    font-weight: 300;
+    opacity: 0.8;
 }
 
 /* Заголовки секций */
@@ -90,6 +108,7 @@ body {
     font-size: 32px;
     text-transform: uppercase;
     margin-bottom: 40px;
+    letter-spacing: 1px;
 }
 
 .white { color: white; }
@@ -102,20 +121,24 @@ body {
 }
 
 .news-card {
-    padding: 20px;
+    padding: 30px;
     border-left: 4px solid #000;
     background: var(--accent-gray);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.news-card:hover { transform: translateY(-5px); }
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
 
-.news-date { font-size: 12px; color: #666; }
+.news-date { font-size: 12px; color: #666; margin-bottom: 10px; }
 
 /* Таблица рейтинга */
 .ranking-table {
     width: 100%;
     border-collapse: collapse;
+    margin-top: 20px;
 }
 
 .ranking-table th, .ranking-table td {
@@ -124,45 +147,116 @@ body {
     border-bottom: 1px solid #eee;
 }
 
+.ranking-table th {
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #666;
+}
+
 .ranking-table tr:hover { background-color: var(--accent-gray); }
 
 /* Турниры */
+.tournament-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
 .t-item {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 25px;
     border: 1px solid #333;
     color: white;
-    margin-bottom: 10px;
+    transition: border-color 0.3s;
+}
+
+.t-item:hover {
+    border-color: #555;
 }
 
 .t-status {
     background: white;
     color: black;
-    padding: 2px 8px;
+    padding: 3px 10px;
     font-size: 12px;
     font-weight: bold;
     margin-right: 15px;
+    text-transform: uppercase;
+}
+
+.t-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.t-prize {
+    font-family: var(--font-heading);
+    font-size: 20px;
 }
 
 /* Партнеры */
 .partner-logos {
     display: flex;
     justify-content: space-around;
+    align-items: center;
+    gap: 40px;
     opacity: 0.5;
     filter: grayscale(1);
+}
+
+.partner-item {
+    font-weight: bold;
+    font-size: 18px;
 }
 
 /* Футер */
 footer {
     background: #000;
     color: #fff;
-    padding: 40px 10%;
+    padding: 60px 10%;
     text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }
 
 .reg-link {
     color: #fff;
     font-size: 14px;
     text-decoration: underline;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.reg-link:hover {
+    opacity: 1;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .container {
+        padding: 50px 5%;
+    }
+
+    .navbar {
+        padding: 10px 5%;
+    }
+
+    .nav-links li {
+        margin-left: 15px;
+    }
+
+    .nav-links a {
+        font-size: 12px;
+    }
+
+    .logo-img {
+        max-height: 50px;
+    }
 }
