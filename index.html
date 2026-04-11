@@ -1,520 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Garnir World Esports | GWE Elite Gaming</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-black: #0a0a0a;
-            --card-bg: #141414;
-            --gold: #d4af37;
-            --gold-hover: #f1c40f;
-            --white: #ffffff;
-            --gray: #888888;
-            --border: #222222;
-            --transition: all 0.3s ease;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-black);
-            color: var(--white);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* --- Navigation --- */
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-        }
-
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-        }
-
-        .logo {
-            font-weight: 800;
-            font-size: 1.5rem;
-            letter-spacing: -1px;
-            color: var(--white);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo span { color: var(--gold); }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--gray);
-            font-size: 0.9rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover { color: var(--gold); }
-
-        .auth-btn {
-            background: transparent;
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            padding: 0.6rem 1.2rem;
-            border-radius: 4px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .auth-btn:hover {
-            background: var(--gold);
-            color: var(--bg-black);
-        }
-
-        /* --- Hero Section --- */
-        .hero {
-            height: 70vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            background: linear-gradient(180deg, rgba(10,10,10,0) 0%, rgba(10,10,10,1) 100%), 
-                        radial-gradient(circle at center, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
-            padding: 2rem;
-        }
-
-        .hero-content h1 {
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
-            font-weight: 800;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-        }
-
-        .hero-content p {
-            color: var(--gray);
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-        }
-
-        .cta-group {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-        }
-
-        .btn-primary {
-            background: var(--gold);
-            color: var(--bg-black);
-            padding: 1rem 2.5rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 700;
-            text-transform: uppercase;
-            transition: var(--transition);
-        }
-
-        .btn-live {
-            background: #e74c3c;
-            color: white;
-            padding: 1rem 2.5rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.7; }
-            100% { opacity: 1; }
-        }
-
-        /* --- Match Ticker --- */
-        .match-ticker {
-            background: var(--card-bg);
-            padding: 1.5rem 0;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .ticker-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-            padding: 0 2rem;
-        }
-
-        .match-card {
-            background: var(--bg-black);
-            border: 1px solid var(--border);
-            padding: 1rem;
-            border-radius: 4px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-        }
-
-        .match-card.live { border-left: 3px solid var(--gold); }
-
-        .team-mini {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-            flex: 1;
-        }
-
-        .team-logo-small {
-            width: 32px;
-            height: 32px;
-            background: #222;
-            border-radius: 50%;
-        }
-
-        .match-info {
-            text-align: center;
-            flex: 1;
-        }
-
-        .match-time {
-            font-size: 0.7rem;
-            color: var(--gold);
-            font-weight: 700;
-        }
-
-        /* --- Main Content Layout --- */
-        .container {
-            max-width: 1200px;
-            margin: 4rem auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 3rem;
-            padding: 0 2rem;
-        }
-
-        h2 {
-            font-size: 1.5rem;
-            text-transform: uppercase;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        h2::after {
-            content: '';
-            height: 2px;
-            background: var(--gold);
-            flex-grow: 1;
-        }
-
-        /* --- Rankings --- */
-        .rank-list {
-            background: var(--card-bg);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .rank-row {
-            display: grid;
-            grid-template-columns: 50px 1fr 80px 80px;
-            padding: 1rem;
-            border-bottom: 1px solid var(--border);
-            align-items: center;
-            transition: var(--transition);
-        }
-
-        .rank-row:hover { background: #1a1a1a; }
-        .rank-row.header {
-            font-weight: 700;
-            color: var(--gray);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-        }
-
-        .rank-num { color: var(--gold); font-weight: 800; }
-        .team-meta { display: flex; align-items: center; gap: 12px; }
-
-        /* --- Archive --- */
-        .result-card {
-            background: var(--card-bg);
-            margin-bottom: 1rem;
-            padding: 1.2rem;
-            border-radius: 4px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .score-box {
-            background: var(--bg-black);
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            font-weight: 800;
-            letter-spacing: 2px;
-        }
-
-        .winner { color: var(--gold); }
-
-        /* --- Footer --- */
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 4rem 2rem;
-            margin-top: 4rem;
-            background: #050505;
-        }
-
-        .footer-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-        }
-
-        .footer-col h4 {
-            color: var(--gold);
-            margin-bottom: 1.2rem;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-        }
-
-        .footer-col ul { list-style: none; }
-        .footer-col ul li { margin-bottom: 0.5rem; }
-        .footer-col a { color: var(--gray); text-decoration: none; font-size: 0.85rem; }
-
-        @media (max-width: 992px) {
-            .container { grid-template-columns: 1fr; }
-            .nav-links { display: none; }
-        }
-    </style>
+    <title>Garnir World Esports | GWE</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <header>
-        <nav>
-            <a href="#" class="logo">GWE<span>.</span></a>
-            <ul class="nav-links">
-                <li><a href="#">Tournaments</a></li>
-                <li><a href="#">Teams</a></li>
-                <li><a href="#">Results</a></li>
-                <li><a href="#">News</a></li>
-            </ul>
-            <button class="auth-btn">LOGIN / REGISTER</button>
-        </nav>
+    <nav class="navbar">
+        <div class="logo">GWE<span>.</span></div>
+        <ul class="nav-links">
+            <li><a href="#news">Новости</a></li>
+            <li><a href="#tournaments">Турниры</a></li>
+            <li><a href="#ranking">Рейтинг</a></li>
+            <li><a href="#regulations">Регламент</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <h1>GARNIR WORLD ESPORTS</h1>
+        <p>Элита CS2 соревнований</p>
     </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <p>CS2 PREMIER LEAGUE | SEASON 04</p>
-            <h1>GARNIR WORLD<br>ESPORTS</h1>
-            <div class="cta-group">
-                <a href="#" class="btn-live">
-                    <svg width="12" height="12" viewBox="0 0 10 10" fill="currentColor"><circle cx="5" cy="5" r="5"/></svg>
-                    LIVE: GLOBAL FINALS
-                </a>
-                <a href="#" class="btn-primary">REGISTER TEAM</a>
+    <main>
+        <section id="news" class="container">
+            <h2 class="section-title">Последние новости</h2>
+            <div class="news-grid">
+                <article class="news-card">
+                    <div class="news-date">11.04.2026</div>
+                    <h3>Анонс весеннего сплита</h3>
+                    <p>Подробности квалификаций на предстоящий Major-турнир...</p>
+                </article>
+                <article class="news-card">
+                    <div class="news-date">09.04.2026</div>
+                    <h3>Обновление регламента</h3>
+                    <p>Изменения в правилах выбора карт и технического тайм-аута.</p>
+                </article>
             </div>
-        </div>
-    </section>
-
-    <div class="match-ticker">
-        <div class="ticker-container">
-            <div class="match-card live">
-                <div class="team-mini">
-                    <div class="team-logo-small"></div>
-                    <span style="font-size: 0.7rem">NAVI</span>
-                </div>
-                <div class="match-info">
-                    <div class="match-time">LIVE</div>
-                    <div style="font-weight: 800">1 : 0</div>
-                </div>
-                <div class="team-mini">
-                    <div class="team-logo-small"></div>
-                    <span style="font-size: 0.7rem">G2</span>
-                </div>
-            </div>
-            <div class="match-card">
-                <div class="team-mini">
-                    <div class="team-logo-small"></div>
-                    <span style="font-size: 0.7rem">FAZE</span>
-                </div>
-                <div class="match-info">
-                    <div class="match-time">18:30</div>
-                    <div style="font-weight: 800">VS</div>
-                </div>
-                <div class="team-mini">
-                    <div class="team-logo-small"></div>
-                    <span style="font-size: 0.7rem">VITALITY</span>
-                </div>
-            </div>
-            <div class="match-card">
-                <div class="team-mini">
-                    <div class="team-logo-small"></div>
-                    <span style="font-size: 0.7rem">LIQUID</span>
-                </div>
-                <div class="match-info">
-                    <div class="match-time">21:00</div>
-                    <div style="font-weight: 800">VS</div>
-                </div>
-                <div class="team-mini">
-                    <div class="team-logo-small"></div>
-                    <span style="font-size: 0.7rem">MOUZ</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <main class="container">
-        <section>
-            <h2>Recent Results</h2>
-            <div class="result-card">
-                <div class="team-meta">
-                    <div class="team-logo-small"></div>
-                    <span class="winner">Astralis</span>
-                </div>
-                <div class="score-box">2 - 0</div>
-                <div class="team-meta" style="flex-direction: row-reverse;">
-                    <div class="team-logo-small"></div>
-                    <span>Cloud9</span>
-                </div>
-            </div>
-            <div class="result-card">
-                <div class="team-meta">
-                    <div class="team-logo-small"></div>
-                    <span class="winner">Fnatic</span>
-                </div>
-                <div class="score-box">2 - 1</div>
-                <div class="team-meta" style="flex-direction: row-reverse;">
-                    <div class="team-logo-small"></div>
-                    <span>Virtus.Pro</span>
-                </div>
-            </div>
-            <div class="result-card">
-                <div class="team-meta">
-                    <div class="team-logo-small"></div>
-                    <span class="winner">Team Spirit</span>
-                </div>
-                <div class="score-box">2 - 0</div>
-                <div class="team-meta" style="flex-direction: row-reverse;">
-                    <div class="team-logo-small"></div>
-                    <span>HEROIC</span>
-                </div>
-            </div>
-            <button class="auth-btn" style="width: 100%; margin-top: 1rem; background: var(--card-bg); border-color: var(--border);">VIEW FULL BRACKET</button>
         </section>
 
-        <aside>
-            <h2>Power Rankings</h2>
-            <div class="rank-list">
-                <div class="rank-row header">
-                    <div>#</div>
-                    <div>Team</div>
-                    <div>W/L</div>
-                    <div>Points</div>
-                </div>
-                <div class="rank-row">
-                    <div class="rank-num">1</div>
-                    <div class="team-meta">
-                        <div class="team-logo-small"></div>
-                        <span>G2 Esports</span>
+        <section id="tournaments" class="container bg-black">
+            <h2 class="section-title white">Текущие турниры</h2>
+            <div class="tournament-list">
+                <div class="t-item">
+                    <div class="t-info">
+                        <span class="t-status">Live</span>
+                        <span class="t-name">Garnir Premier Fall</span>
                     </div>
-                    <div>12-2</div>
-                    <div style="font-weight: 700">1250</div>
-                </div>
-                <div class="rank-row">
-                    <div class="rank-num">2</div>
-                    <div class="team-meta">
-                        <div class="team-logo-small"></div>
-                        <span>Vitality</span>
-                    </div>
-                    <div>10-4</div>
-                    <div style="font-weight: 700">1120</div>
-                </div>
-                <div class="rank-row">
-                    <div class="rank-num">3</div>
-                    <div class="team-meta">
-                        <div class="team-logo-small"></div>
-                        <span>NAVI</span>
-                    </div>
-                    <div>9-5</div>
-                    <div style="font-weight: 700">1080</div>
-                </div>
-                <div class="rank-row">
-                    <div class="rank-num">4</div>
-                    <div class="team-meta">
-                        <div class="team-logo-small"></div>
-                        <span>Faze Clan</span>
-                    </div>
-                    <div>8-6</div>
-                    <div style="font-weight: 700">950</div>
+                    <div class="t-prize">$50,000</div>
                 </div>
             </div>
-        </aside>
+        </section>
+
+        <section id="ranking" class="container">
+            <h2 class="section-title">Мировой рейтинг GWE</h2>
+            <table class="ranking-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Команда</th>
+                        <th>Очки</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>Team Spirit</td><td>1000</td></tr>
+                    <tr><td>2</td><td>FaZe Clan</td><td>950</td></tr>
+                    <tr><td>3</td><td>Natus Vincere</td><td>920</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="partners" class="container partners">
+            <div class="partner-logos">
+                <div class="partner-item">PARTNER 1</div>
+                <div class="partner-item">PARTNER 2</div>
+                <div class="partner-item">PARTNER 3</div>
+            </div>
+        </section>
     </main>
 
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <a href="#" class="logo">GWE<span>.</span></a>
-                <p style="color: var(--gray); font-size: 0.8rem; margin-top: 1rem;">
-                    The premier destination for competitive Counter-Strike excellence. Professionalism meets the next generation of gaming.
-                </p>
-            </div>
-            <div class="footer-col">
-                <h4>Platform</h4>
-                <ul>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Cookie Policy</a></li>
-                    <li><a href="#">Brand Assets</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Connect</h4>
-                <ul>
-                    <li><a href="#">X / Twitter</a></li>
-                    <li><a href="#">Discord</a></li>
-                    <li><a href="#">YouTube</a></li>
-                    <li><a href="#">Twitch</a></li>
-                </ul>
-            </div>
-        </div>
-        <div style="max-width: 1200px; margin: 3rem auto 0; text-align: center; border-top: 1px solid var(--border); padding-top: 2rem;">
-            <p style="color: var(--gray); font-size: 0.75rem;">&copy; 2026 Garnir World Esports (GWE). All rights reserved.</p>
+    <footer id="regulations">
+        <div class="container footer-content">
+            <p>&copy; 2026 Garnir World Esports. Все права защищены.</p>
+            <a href="#" class="reg-link">Полный регламент турниров</a>
         </div>
     </footer>
 
