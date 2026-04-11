@@ -52,6 +52,11 @@
             z-index: 1000;
         }
 
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
         .logo-img {
             height: 50px;
             width: auto;
@@ -103,6 +108,25 @@
 
         .white { color: white; }
 
+        /* Новости */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .news-card {
+            padding: 30px;
+            border-left: 4px solid #000;
+            background: var(--accent-gray);
+        }
+
+        .news-date {
+            font-size: 12px;
+            color: #777;
+            margin-bottom: 5px;
+        }
+
         /* Турниры */
         .tournament-list {
             display: flex;
@@ -151,17 +175,14 @@
             font-weight: bold;
         }
 
-        /* Стиль для даты */
         .t-date {
             font-size: 14px;
             color: #888;
-            font-weight: normal;
         }
 
         .t-prize {
             font-family: var(--font-heading);
             font-size: 20px;
-            white-space: nowrap;
         }
 
         /* Рейтинг */
@@ -174,6 +195,14 @@
             padding: 20px;
             text-align: left;
             border-bottom: 1px solid #eee;
+        }
+
+        /* Партнеры */
+        .partner-logos {
+            display: flex;
+            justify-content: space-around;
+            opacity: 0.4;
+            padding: 40px 0;
         }
 
         footer {
@@ -206,6 +235,22 @@
     </header>
 
     <main>
+        <section id="news" class="container">
+            <h2 class="section-title">Последние новости</h2>
+            <div class="news-grid">
+                <article class="news-card">
+                    <div class="news-date">11.04.2026</div>
+                    <h3>Анонс весеннего сплита</h3>
+                    <p>Подробности квалификаций на предстоящий Major-турнир...</p>
+                </article>
+                <article class="news-card">
+                    <div class="news-date">09.04.2026</div>
+                    <h3>Обновление регламента</h3>
+                    <p>Изменения в правилах выбора карт и технического тайм-аута.</p>
+                </article>
+            </div>
+        </section>
+
         <section id="tournaments" class="container bg-black">
             <h2 class="section-title white">Турниры</h2>
             <div class="tournament-list">
@@ -256,6 +301,14 @@
                     <tr><td>3</td><td>Natus Vincere</td><td>920</td></tr>
                 </tbody>
             </table>
+        </section>
+
+        <section id="partners" class="container">
+            <div class="partner-logos">
+                <div class="partner-item">PARTNER 1</div>
+                <div class="partner-item">PARTNER 2</div>
+                <div class="partner-item">PARTNER 3</div>
+            </div>
         </section>
     </main>
 
