@@ -1,290 +1,168 @@
-/*
- * GARNIR WORLD ESPORTS (GWE) - CORE DESIGN SYSTEM
- * Version: 1.0.0
- * Lead UI/UX Artist: Gemini
- * Palette: Deep Matte Black, Luxury Gold, Crisp White
- */
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Oswald:wght@500;700&display=swap');
-
 :root {
-    /* Colors */
-    --color-bg-main: #0a0a0a;
-    --color-bg-surface: #121212;
-    --color-bg-card-alt: #0f0f0f;
-    --color-gold: #d4af37;
-    --color-gold-bright: #f1c40f;
-    --color-text-pri: #ffffff;
-    --color-text-sec: #b3b3b3;
-    --color-border: #222222;
-    --color-live: #ff4b4b;
-
-    /* Gradients */
-    --grad-gold-metallic: linear-gradient(135deg, #d4af37 0%, #f1c40f 50%, #d4af37 100%);
-    --grad-surface: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 100%);
-
-    /* Spacing & Borders */
-    --radius-sm: 2px;
-    --border-thin: 1px solid var(--color-border);
-    --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --bg-white: #ffffff;
+    --text-black: #000000;
+    --accent-gray: #f4f4f4;
+    --font-main: 'Play', sans-serif;
+    --font-heading: 'Broaven oblique', 'Play', sans-serif; /* Резервный Play, если Broaven не загружен */
 }
 
-/* --- Base Resets & Typography --- */
-body {
-    background-color: var(--color-bg-main);
-    color: var(--color-text-pri);
-    font-family: 'Inter', sans-serif;
+* {
     margin: 0;
-    -webkit-font-smoothing: antialiased;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-h1, h2, h3, .u-uppercase {
-    font-family: 'Oswald', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-white);
+    color: var(--text-black);
+    line-height: 1.6;
 }
 
-/* --- Layout Blocks --- */
-.l-container {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 0 20px;
+.container {
+    padding: 80px 10%;
 }
 
-/* --- Components: Navigation --- */
+.bg-black {
+    background-color: var(--text-black);
+}
+
+/* Навигация */
 .navbar {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding: 0 40px;
-    height: 70px;
-    background: var(--color-bg-main);
-    border-bottom: var(--border-thin);
+    align-items: center;
+    padding: 20px 10%;
+    border-bottom: 1px solid #eee;
     position: sticky;
     top: 0;
+    background: white;
     z-index: 1000;
 }
 
-.navbar__links {
-    display: flex;
-    gap: 30px;
+.logo {
+    font-family: var(--font-heading);
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.logo span { color: #888; }
+
+.nav-links {
     list-style: none;
+    display: flex;
 }
 
-.navbar__link {
-    color: var(--color-text-sec);
+.nav-links li { margin-left: 30px; }
+
+.nav-links a {
     text-decoration: none;
-    font-weight: 600;
-    font-size: 0.85rem;
+    color: var(--text-black);
+    font-weight: bold;
     text-transform: uppercase;
-    transition: var(--transition-base);
+    font-size: 14px;
+    transition: 0.3s;
 }
 
-.navbar__link:hover {
-    color: var(--color-gold);
-}
+.nav-links a:hover { opacity: 0.6; }
 
-/* --- Components: Buttons --- */
-.btn-gold {
-    background: var(--grad-gold-metallic);
-    color: #000;
-    border: none;
-    padding: 10px 24px;
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    cursor: pointer;
-    border-radius: var(--radius-sm);
-    transition: var(--transition-base);
-    position: relative;
-    overflow: hidden;
-}
-
-.btn-gold:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
-    background: var(--color-gold-bright);
-}
-
-/* --- Components: Hero Section --- */
+/* Hero секция */
 .hero {
-    padding: 100px 0;
-    background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
-    text-align: center;
-    border-bottom: var(--border-thin);
-}
-
-.hero__title {
-    font-size: 4rem;
-    margin: 0;
-    background: linear-gradient(to bottom, #fff 0%, #888 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-/* --- Components: Match Ticker --- */
-.match-ticker {
+    height: 60vh;
     display: flex;
-    overflow-x: auto;
-    background: var(--color-bg-surface);
-    border-bottom: var(--border-thin);
-}
-
-.match-card {
-    flex: 0 0 280px;
-    padding: 15px;
-    border-right: var(--border-thin);
-    border-left: 3px solid transparent;
-    transition: var(--transition-base);
-    cursor: pointer;
-}
-
-.match-card--live {
-    border-left-color: var(--color-gold);
-}
-
-.match-card:hover {
-    background: rgba(255, 255, 255, 0.02);
-}
-
-.match-card__status {
-    font-size: 0.65rem;
-    font-weight: 800;
-    color: var(--color-text-sec);
-    margin-bottom: 8px;
-    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: 6px;
+    text-align: center;
+    border-bottom: 1px solid #000;
 }
 
-.match-card__status--live {
-    color: var(--color-gold);
+.hero h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(40px, 8vw, 80px);
+    line-height: 1;
 }
 
-/* --- Components: HLTV-Style Rankings --- */
+/* Заголовки секций */
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 32px;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+}
+
+.white { color: white; }
+
+/* Новости */
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.news-card {
+    padding: 20px;
+    border-left: 4px solid #000;
+    background: var(--accent-gray);
+    transition: transform 0.3s ease;
+}
+
+.news-card:hover { transform: translateY(-5px); }
+
+.news-date { font-size: 12px; color: #666; }
+
+/* Таблица рейтинга */
 .ranking-table {
     width: 100%;
     border-collapse: collapse;
-    background: var(--color-bg-surface);
-    font-size: 0.9rem;
 }
 
-.ranking-table__header {
-    background: var(--color-bg-main);
-    color: var(--color-text-sec);
+.ranking-table th, .ranking-table td {
+    padding: 20px;
     text-align: left;
-    font-size: 0.75rem;
-    text-transform: uppercase;
+    border-bottom: 1px solid #eee;
 }
 
-.ranking-table__header th {
-    padding: 12px 16px;
-    border-bottom: var(--border-thin);
-}
+.ranking-table tr:hover { background-color: var(--accent-gray); }
 
-.ranking-table__row {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-    transition: var(--transition-base);
-}
-
-.ranking-table__row:nth-child(even) {
-    background-color: var(--color-bg-card-alt);
-}
-
-.ranking-table__row:hover {
-    background-color: #1a1a1a;
-}
-
-.ranking-table__row--top-one {
-    border-left: 2px solid var(--color-gold);
-    background: linear-gradient(90deg, rgba(212, 175, 55, 0.05) 0%, transparent 100%) !important;
-}
-
-.ranking-table__row td {
-    padding: 14px 16px;
-}
-
-.ranking-table__rank {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-    color: var(--color-gold);
-}
-
-.ranking-table__points {
-    color: var(--color-gold);
-    font-weight: 600;
-}
-
-/* --- Components: Tournament Brackets --- */
-.bracket {
-    display: grid;
-    grid-auto-flow: column;
-    gap: 40px;
-    padding: 40px 0;
-}
-
-.bracket__match {
-    background: var(--color-bg-surface);
-    border: var(--border-thin);
-    width: 220px;
-    margin-bottom: 20px;
-}
-
-.bracket__team {
-    padding: 10px 12px;
+/* Турниры */
+.t-item {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding: 25px;
+    border: 1px solid #333;
+    color: white;
+    margin-bottom: 10px;
 }
 
-.bracket__team--winner {
-    background: rgba(212, 175, 55, 0.1);
+.t-status {
+    background: white;
+    color: black;
+    padding: 2px 8px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-right: 15px;
 }
 
-.bracket__score {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
+/* Партнеры */
+.partner-logos {
+    display: flex;
+    justify-content: space-around;
+    opacity: 0.5;
+    filter: grayscale(1);
 }
 
-/* --- Animations --- */
-@keyframes pulse-gold {
-    0% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(1.2); }
-    100% { opacity: 1; transform: scale(1); }
+/* Футер */
+footer {
+    background: #000;
+    color: #fff;
+    padding: 40px 10%;
+    text-align: center;
 }
 
-.live-indicator {
-    width: 8px;
-    height: 8px;
-    background-color: var(--color-gold);
-    border-radius: 50%;
-    display: inline-block;
-    animation: pulse-gold 2s infinite ease-in-out;
-}
-
-/* --- Utilities --- */
-.u-text-gold { color: var(--color-gold); }
-.u-text-muted { color: var(--color-text-sec); }
-
-/* --- Responsive Design --- */
-@media (max-width: 1024px) {
-    .navbar__links { display: none; }
-    .hero__title { font-size: 2.5rem; }
-    
-    .ranking-table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-    }
-}
-
-@media (max-width: 768px) {
-    .hero { padding: 60px 20px; }
-    
-    .bracket {
-        grid-auto-flow: row;
-        justify-items: center;
-    }
+.reg-link {
+    color: #fff;
+    font-size: 14px;
+    text-decoration: underline;
 }
