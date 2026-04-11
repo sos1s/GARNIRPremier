@@ -3,50 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GWE CS2 | Esports League</title>
+    <title>GWE PREMIER CS2 | THE ULTIMATE STAGE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    
     <nav class="side-nav">
-        <div class="logo">GWE</div>
+        <div class="logo-container">
+            <span class="logo">GWE</span>
+            <span class="logo-sub">PREMIER</span>
+        </div>
         <ul class="nav-links">
-            <li class="active"><i class="icon-home"></i><span>Home</span></li>
-            <li><i class="icon-trophy"></i><span>Tournaments</span></li>
-            <li><i class="icon-ticket"></i><span>Tickets</span></li>
-            <li><i class="icon-news"></i><span>News</span></li>
+            <li class="active"><span class="icon">•</span> Home</li>
+            <li><span class="icon">/</span> Arena</li>
+            <li><span class="icon">[ ]</span> Register</li>
+            <li><span class="icon">></span> Feed</li>
         </ul>
         <div class="nav-footer">
-            <button class="login-btn">Login</button>
+            <button class="login-btn-outline">Sign In</button>
         </div>
     </nav>
 
-    <main class="main-content">
-        <section class="hero">
-            <div class="overlay"></div>
-            <div class="hero-body">
-                <span class="date-badge">01 SEPTEMBER – 15 OCTOBER 2026</span>
-                <h1 class="main-title">GWE PREMIER</h1>
-                <p class="hero-desc">THE ULTIMATE CS2 BATTLEGROUND</p>
+    <main class="content-split">
+        
+        <section class="cinematic-hero">
+            <div class="glow-effect"></div>
+            <div class="text-frame">
+                <span class="modern-badge">SEPT 2026 // $500,000 PRIZE POOL</span>
+                <h1 class="main-title">DOMINATE<br>THE SERVER.</h1>
+                <p class="subtitle">Global Warfare Esports presents the definitive CS2 championship.</p>
+            </div>
+        </div>
+
+            <div class="timer-float">
+                <div class="time-block"><span class="val">85</span><span class="lbl">DAYS</span></div>
+                <div class="separator">:</div>
+                <div class="time-block"><span class="val">19</span><span class="lbl">HOURS</span></div>
+                <div class="separator">:</div>
+                <div class="time-block"><span class="val">22</span><span class="lbl">MINS</span></div>
+            </div>
+        </section>
+
+        <section class="fluid-info">
+            <div class="info-content">
+                <div class="progress-info-stack">
+                    <span class="label">LEAGUE STATUS</span>
+                    <h2 class="section-heading">Qualifiers in Progress</h2>
+                </div>
                 
-                <div class="countdown">
-                    <div class="time-block"><span>85</span><label>DAYS</label></div>
-                    <div class="time-block"><span>19</span><label>HOURS</label></div>
-                    <div class="time-block"><span>22</span><label>MINS</label></div>
-                    <div class="time-block"><span>32</span><label>SECS</label></div>
+                <div class="fluid-progress-container">
+                    <div class="fluid-progress-bar" style="width: 20%;">
+                        <span class="fluid-value">20%</span>
+                        <div class="neon-glow-tip"></div>
+                    </div>
                 </div>
-
-                <button class="scroll-info">SCROLL FOR INFO ↓</button>
-            </div>
-        </section>
-
-        <section class="road-to">
-            <h2>Road to GWE 2026</h2>
-            <div class="progress-container">
-                <div class="progress-bar" style="width: 20%;">
-                    <span class="progress-text">20%</span>
+                <div class="next-match-preview">
+                    <span>NEXT MATCH IN 2H</span>
+                    <button class="view-bracket-btn">View Bracket →</button>
                 </div>
             </div>
         </section>
+
     </main>
 </body>
 </html>
