@@ -3,102 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GARNIR PREMIER | ROAD TO EWC</title>
-    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <title>GARNIR PREMIER | ТУРНИРЫ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* 1. БАЗОВЫЕ НАСТРОЙКИ */
+        /* 1. БАЗОВЫЕ НАСТРОЙКИ ФОНА */
         html { scrollbar-gutter: stable; background-color: #000; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Play', sans-serif !important; }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
         body { 
-            font-family: 'Play', sans-serif;
-            background: #050505 url('img/bgsait.png') no-repeat center top fixed;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out forwards;
+            margin: 0;
+            min-height: 100vh; 
+            background: #000 url('img/bgsait.png') no-repeat center center fixed;
             background-size: cover;
             color: #fff;
             overflow-x: hidden;
         }
 
-        /* 2. НАВИГАЦИЯ (EWC STYLE) */
+        /* 2. ШАПКА (МЕНЮ СЛЕВА) */
         nav {
-            height: 80px; background: rgba(0,0,0,0.9);
+            height: 70px; background: #000;
             display: flex; align-items: center; justify-content: space-between;
-            padding: 0 50px; border-bottom: 2px solid #FF0033;
-            position: sticky; top: 0; z-index: 1000;
+            padding: 0 40px; border-bottom: 1px solid rgba(255,255,255,0.1);
         }
-        .nav-left { display: flex; align-items: center; gap: 50px; }
-        .my-logo { height: 50px; cursor: pointer; filter: drop-shadow(0 0 5px #FF0033); }
-        .nav-menu { display: flex; gap: 30px; }
+        .nav-left { 
+            display: flex; 
+            align-items: center; 
+            gap: 60px; /* Отступ между лого и кнопками меню */
+        }
+        .my-logo { height: 60px; cursor: pointer; }
+        
+        .nav-menu { 
+            display: flex; 
+            gap: 35px; /* Расстояние между пунктами меню */
+        }
+        
         .nav-link { 
-            color: #fff; text-decoration: none; font-size: 14px; font-weight: 700; 
-            text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; 
+            color: #fff; 
+            text-decoration: none; 
+            font-size: 14px; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            opacity: 0.8; 
+            transition: 0.3s; 
         }
-        .nav-link:hover, .nav-link.active { color: #FF0033; }
+        .nav-link:hover, .nav-link.active { color: #FF0033; opacity: 1; }
 
-        /* 3. ГЛАВНЫЙ БАННЕР (HERO SECTION) */
-        .hero {
-            width: 100%; height: 500px;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.2), #000), url('img/hero_bg.png');
-            background-size: cover; background-position: center;
-            display: flex; flex-direction: column; justify-content: center;
-            align-items: center; text-align: center; padding: 20px;
-        }
-        .hero h1 { 
-            font-family: 'Oswald', sans-serif; font-size: 80px; 
-            text-transform: uppercase; line-height: 1; margin-bottom: 10px;
-        }
-        .hero p { font-size: 18px; color: #aaa; max-width: 600px; }
+        .nav-right { color: #999; font-size: 11px; font-weight: 700; text-transform: uppercase; }
 
-        /* 4. КОНТЕЙНЕР С КОНТЕНТОМ */
-        .container { max-width: 1400px; margin: -50px auto 100px; padding: 0 20px; }
-
-        /* 5. СЕТКА КАРТОЧЕК */
-        .events-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
+        /* 3. СЕТКА НА ВСЮ ШИРИНУ */
+        .main-container {
+            max-width: 100%;
+            margin: 40px 0;
+            padding: 0 40px;
+            display: block;
         }
 
-        .event-card {
-            background: #111;
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
-            overflow: hidden;
+        .group-title {
+            font-size: 18px;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 15px;
+            margin-top: 30px;
+            color: #fff;
+        }
+
+        /* 5. КАРТОЧКА ТУРНИРА */
+        .t-card {
+            background: rgba(22, 12, 18, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex; 
+            align-items: stretch; 
+            margin-bottom: 8px; 
+            height: 55px; 
+            transition: 0.3s ease; 
             text-decoration: none;
             color: inherit;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            width: 100%;
         }
 
-        .event-card:hover {
-            transform: scale(1.03);
-            border-color: #FF0033;
-            box-shadow: 0 10px 30px rgba(255, 0, 51, 0.2);
+        /* ТОЛЬКО СВЕЧЕНИЕ (БЕЗ ДВИЖЕНИЯ) */
+        .t-card:hover { 
+            background: rgba(255, 255, 255, 0.1); 
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
         }
 
-        .event-img {
-            width: 100%; height: 200px;
-            background-size: cover; background-position: center;
-            position: relative;
+        /* БЛОК ЛОГОТИПА (БАННЕР ВНУТРИ КАРТОЧКИ) */
+        .t-logo-box {
+            width: 160px; 
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            border-radius: 8px 0 0 8px;
+        }
+        .t-logo-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            object-position: center;
         }
 
-        .status-tag {
-            position: absolute; top: 15px; left: 15px;
-            background: #FF0033; color: #fff; padding: 4px 12px;
-            font-size: 12px; font-weight: 700; border-radius: 4px;
+        .t-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            justify-content: space-between;
+        }
+
+        .t-name {
+            font-size: 13px;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-right: 20px;
+        }
+
+        .t-right-side {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .t-stats {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            color: #777;
             text-transform: uppercase;
         }
+        .dot { width: 3px; height: 3px; background: #444; border-radius: 50%; }
 
-        .event-info { padding: 20px; }
-        .event-title { 
-            font-family: 'Oswald', sans-serif; font-size: 22px; 
-            text-transform: uppercase; margin-bottom: 10px; 
+        .t-date {
+            border: 1px solid #fff;
+            border-radius: 4px;
+            padding: 2px 10px;
+            font-size: 11px;
+            font-weight: 700;
+            min-width: 90px;
+            text-align: center;
+            white-space: nowrap;
         }
-        .event-details { color: #777; font-size: 13px; display: flex; flex-direction: column; gap: 5px; }
-        .event-details span { color: #ccc; }
 
-        /* ФУТЕР */
-        footer {
-            padding: 50px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05);
-            color: #444; font-size: 12px; text-transform: uppercase; letter-spacing: 2px;
+        .ongoing .t-date {
+            border-color: #FF0033;
+            color: #FF0033;
         }
     </style>
 </head>
@@ -108,68 +168,70 @@
     <div class="nav-left">
         <img src="img/logo.png" class="my-logo" onclick="location.href='index.html'">
         <div class="nav-menu">
-            <a href="index.html" class="nav-link active">Главная</a>
-            <a href="tournaments.html" class="nav-link">Турниры</a> 
-            <a href="#" class="nav-link">Команды</a>
+            <a href="index.html" class="nav-link">Главная</a>
+            <a href="tournaments.html" class="nav-link active">Турниры</a> 
             <a href="#" class="nav-link">Партнеры</a>
         </div>
     </div>
-    <div class="nav-right">GARNIR PREMIER • HUB</div>
+    <div class="nav-right">GARNIR PREMIER • DASHBOARD</div>
 </nav>
 
-<section class="hero">
-    <h1>ROAD TO EWC 2026</h1>
-    <p>Следите за квалификациями к главному мировому событию года в киберспорте. Все матчи и сетки в одном месте.</p>
-</section>
+<div class="main-container">
+    <main>
+        <div class="group-title">Ongoing</div>
+        <a href="#" class="t-card ongoing">
+            <div class="t-logo-box"><img src="img/t1_photo.png"></div>
+            <div class="t-content">
+                <div class="t-name">Turnir GARNIR 1</div>
+                <div class="t-right-side">
+                    <div class="t-stats">
+                        16 Teams <div class="dot"></div> 
+                        $1,100,000 <div class="dot"></div> 
+                    </div>
+                    <div class="t-date">MAR 18 - 29</div>
+                </div>
+            </div>
+        </a>
 
-<div class="container">
-    <div class="events-grid">
+        <div class="group-title">Upcoming</div>
         
-        <a href="tournaments.html" class="event-card">
-            <div class="event-img" style="background-image: url('img/t1_photo.png');">
-                <div class="status-tag">LIVE</div>
-            </div>
-            <div class="event-info">
-                <div class="event-title">Europe Open Qualifier</div>
-                <div class="event-details">
-                    Призовой фонд: <span>$100,000</span><br>
-                    Место: <span>Online</span>
+        <a href="#" class="t-card">
+            <div class="t-logo-box"><img src="img/pgl_logo.png"></div>
+            <div class="t-content">
+                <div class="t-name">PGL Bucharest 2026</div>
+                <div class="t-right-side">
+                    <div class="t-stats">16 Teams <div class="dot"></div> $625,000 <div class="dot"></div> Bucharest, Romania</div>
+                    <div class="t-date">APR 03 - 11</div>
                 </div>
             </div>
         </a>
 
-        <a href="#" class="event-card">
-            <div class="event-img" style="background-image: url('img/pgl_logo.png');">
-                <div class="status-tag" style="background: #555;">Upcoming</div>
-            </div>
-            <div class="event-info">
-                <div class="event-title">Asia Last Chance</div>
-                <div class="event-details">
-                    Призовой фонд: <span>$50,000</span><br>
-                    Место: <span>Seoul, Korea</span>
+        <a href="#" class="t-card">
+            <div class="t-logo-box"><img src="img/iem_logo.png"></div>
+            <div class="t-content">
+                <div class="t-name">IEM Rio 2026</div>
+                <div class="t-right-side">
+                    <div class="t-stats">16 Teams <div class="dot"></div> $300,000 <div class="dot"></div> Rio De Janeiro, Brazil</div>
+                    <div class="t-date">APR 13 - 19</div>
                 </div>
             </div>
         </a>
-
-        <a href="#" class="event-card">
-            <div class="event-img" style="background-image: url('img/iem_logo.png');">
-                <div class="status-tag" style="background: #555;">Upcoming</div>
-            </div>
-            <div class="event-info">
-                <div class="event-title">Americas RMR</div>
-                <div class="event-details">
-                    Призовой фонд: <span>$250,000</span><br>
-                    Место: <span>Monterrey, Mexico</span>
-                </div>
-            </div>
-        </a>
-
-    </div>
+    </main>
 </div>
 
-<footer>
-    © 2026 GARNIR PREMIER. NOT AFFILIATED WITH EWC OFFICIAL.
-</footer>
+<script>
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            if (this.href.includes('.html')) {
+                e.preventDefault();
+                let target = this.href;
+                document.body.style.transition = 'opacity 0.3s ease';
+                document.body.style.opacity = '0';
+                setTimeout(() => { window.location.href = target; }, 300);
+            }
+        });
+    });
+</script>
 
 </body>
 </html>
