@@ -1,320 +1,290 @@
-/* * PROJECT: Garnir World Esports (GWE) Platform
- * AUTHOR: Senior UI/UX Engineer
- * ARCHITECTURE: BEM (Block Element Modifier)
+/*
+ * GARNIR WORLD ESPORTS (GWE) - CORE DESIGN SYSTEM
+ * Version: 1.0.0
+ * Lead UI/UX Artist: Gemini
+ * Palette: Deep Matte Black, Luxury Gold, Crisp White
  */
 
-/* ==========================================================================
-   1. VARIABLES & DESIGN TOKENS
-   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Oswald:wght@500;700&display=swap');
+
 :root {
     /* Colors */
-    --clr-primary: #0a0a0a;
-    --clr-surface: #121212;
-    --clr-surface-light: #1a1a1a;
-    --clr-accent: #d4af37;
-    --clr-accent-bright: #f1d279;
-    --clr-accent-glow: rgba(212, 175, 55, 0.3);
-    --clr-text-main: #ffffff;
-    --clr-text-muted: #a0a0a0;
-    --clr-border: rgba(212, 175, 55, 0.15);
-    --clr-live: #ff4b4b;
+    --color-bg-main: #0a0a0a;
+    --color-bg-surface: #121212;
+    --color-bg-card-alt: #0f0f0f;
+    --color-gold: #d4af37;
+    --color-gold-bright: #f1c40f;
+    --color-text-pri: #ffffff;
+    --color-text-sec: #b3b3b3;
+    --color-border: #222222;
+    --color-live: #ff4b4b;
 
     /* Gradients */
-    --grad-gold: linear-gradient(135deg, #c5a028 0%, #f1d279 50%, #d4af37 100%);
-    --grad-dark: linear-gradient(180deg, rgba(10, 10, 10, 0) 0%, rgba(10, 10, 10, 0.9) 100%);
+    --grad-gold-metallic: linear-gradient(135deg, #d4af37 0%, #f1c40f 50%, #d4af37 100%);
+    --grad-surface: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 100%);
 
-    /* Spacing */
-    --space-xs: 0.5rem;
-    --space-sm: 1rem;
-    --space-md: 2rem;
-    --space-lg: 4rem;
-
-    /* Transitions */
-    --trans-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    --trans-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-
-    /* Shadows */
-    --shadow-gold: 0 10px 30px -10px rgba(212, 175, 55, 0.3);
+    /* Spacing & Borders */
+    --radius-sm: 2px;
+    --border-thin: 1px solid var(--color-border);
+    --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ==========================================================================
-   2. RESET & BASE STYLES
-   ========================================================================== */
-*, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    font-size: 16px;
-    scroll-behavior: smooth;
-}
-
+/* --- Base Resets & Typography --- */
 body {
-    background-color: var(--clr-primary);
-    color: var(--clr-text-main);
-    font-family: 'Montserrat', 'Inter', system-ui, -apple-system, sans-serif;
-    line-height: 1.6;
-    overflow-x: hidden;
+    background-color: var(--color-bg-main);
+    color: var(--color-text-pri);
+    font-family: 'Inter', sans-serif;
+    margin: 0;
     -webkit-font-smoothing: antialiased;
 }
 
-img {
-    max-width: 100%;
-    display: block;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-    transition: var(--trans-fast);
-}
-
-/* Typography Scale */
-h1, h2, h3, h4 {
-    font-weight: 800;
+h1, h2, h3, .u-uppercase {
+    font-family: 'Oswald', sans-serif;
     text-transform: uppercase;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
+    letter-spacing: 1px;
 }
 
-h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
-h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); }
-h3 { font-size: 1.5rem; }
-
-.text-gold {
-    background: var(--grad-gold);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-/* ==========================================================================
-   3. LAYOUT SYSTEM
-   ========================================================================== */
-.container {
-    width: 100%;
-    max-width: 1280px;
+/* --- Layout Blocks --- */
+.l-container {
+    max-width: 1440px;
     margin: 0 auto;
-    padding: 0 var(--space-sm);
+    padding: 0 20px;
 }
 
-.grid-main {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-md);
-}
-
-/* ==========================================================================
-   4. COMPONENTS
-   ========================================================================== */
-
-/* Header & Nav */
-.header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    background: rgba(10, 10, 10, 0.8);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--clr-border);
-    height: 80px;
+/* --- Components: Navigation --- */
+.navbar {
     display: flex;
     align-items: center;
-}
-
-.nav {
-    display: flex;
     justify-content: space-between;
-    align-items: center;
-    width: 100%;
+    padding: 0 40px;
+    height: 70px;
+    background: var(--color-bg-main);
+    border-bottom: var(--border-thin);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-.nav__list {
+.navbar__links {
     display: flex;
+    gap: 30px;
     list-style: none;
-    gap: var(--space-md);
 }
 
-.nav__link {
-    font-size: 0.85rem;
+.navbar__link {
+    color: var(--color-text-sec);
+    text-decoration: none;
     font-weight: 600;
+    font-size: 0.85rem;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--clr-text-muted);
+    transition: var(--transition-base);
 }
 
-.nav__link:hover {
-    color: var(--clr-accent);
+.navbar__link:hover {
+    color: var(--color-gold);
 }
 
-/* Buttons */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.8rem 2rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 0.75rem;
-    letter-spacing: 0.05em;
-    cursor: pointer;
-    transition: var(--trans-smooth);
+/* --- Components: Buttons --- */
+.btn-gold {
+    background: var(--grad-gold-metallic);
+    color: #000;
     border: none;
+    padding: 10px 24px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    transition: var(--transition-base);
     position: relative;
     overflow: hidden;
 }
 
-.btn--primary {
-    background: var(--grad-gold);
-    color: var(--clr-primary);
+.btn-gold:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+    background: var(--color-gold-bright);
 }
 
-.btn--primary:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-gold);
+/* --- Components: Hero Section --- */
+.hero {
+    padding: 100px 0;
+    background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+    text-align: center;
+    border-bottom: var(--border-thin);
 }
 
-.btn--outline {
-    background: transparent;
-    border: 1px solid var(--clr-accent);
-    color: var(--clr-accent);
+.hero__title {
+    font-size: 4rem;
+    margin: 0;
+    background: linear-gradient(to bottom, #fff 0%, #888 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-.btn--outline:hover {
-    background: var(--clr-accent);
-    color: var(--clr-primary);
+/* --- Components: Match Ticker --- */
+.match-ticker {
+    display: flex;
+    overflow-x: auto;
+    background: var(--color-bg-surface);
+    border-bottom: var(--border-thin);
 }
 
-/* Match Cards & HLTV Rows */
 .match-card {
-    background: var(--clr-surface);
-    border: 1px solid var(--clr-border);
-    padding: var(--space-sm);
-    border-radius: 4px;
-    transition: var(--trans-fast);
+    flex: 0 0 280px;
+    padding: 15px;
+    border-right: var(--border-thin);
+    border-left: 3px solid transparent;
+    transition: var(--transition-base);
+    cursor: pointer;
+}
+
+.match-card--live {
+    border-left-color: var(--color-gold);
 }
 
 .match-card:hover {
-    background: var(--clr-surface-light);
-    border-color: var(--clr-accent);
+    background: rgba(255, 255, 255, 0.02);
 }
 
-.hltv-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.hltv-row {
-    border-bottom: 1px solid #1a1a1a;
-    transition: var(--trans-fast);
-}
-
-.hltv-row:hover {
-    background: rgba(212, 175, 55, 0.03);
-}
-
-.hltv-row td {
-    padding: 1.25rem 1rem;
-}
-
-/* Live Indicators */
-.status--live {
-    color: var(--clr-live);
-    font-weight: 700;
+.match-card__status {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: var(--color-text-sec);
+    margin-bottom: 8px;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
 }
 
-.status--live::before {
-    content: '';
+.match-card__status--live {
+    color: var(--color-gold);
+}
+
+/* --- Components: HLTV-Style Rankings --- */
+.ranking-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--color-bg-surface);
+    font-size: 0.9rem;
+}
+
+.ranking-table__header {
+    background: var(--color-bg-main);
+    color: var(--color-text-sec);
+    text-align: left;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+.ranking-table__header th {
+    padding: 12px 16px;
+    border-bottom: var(--border-thin);
+}
+
+.ranking-table__row {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    transition: var(--transition-base);
+}
+
+.ranking-table__row:nth-child(even) {
+    background-color: var(--color-bg-card-alt);
+}
+
+.ranking-table__row:hover {
+    background-color: #1a1a1a;
+}
+
+.ranking-table__row--top-one {
+    border-left: 2px solid var(--color-gold);
+    background: linear-gradient(90deg, rgba(212, 175, 55, 0.05) 0%, transparent 100%) !important;
+}
+
+.ranking-table__row td {
+    padding: 14px 16px;
+}
+
+.ranking-table__rank {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    color: var(--color-gold);
+}
+
+.ranking-table__points {
+    color: var(--color-gold);
+    font-weight: 600;
+}
+
+/* --- Components: Tournament Brackets --- */
+.bracket {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 40px;
+    padding: 40px 0;
+}
+
+.bracket__match {
+    background: var(--color-bg-surface);
+    border: var(--border-thin);
+    width: 220px;
+    margin-bottom: 20px;
+}
+
+.bracket__team {
+    padding: 10px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.bracket__team--winner {
+    background: rgba(212, 175, 55, 0.1);
+}
+
+.bracket__score {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+}
+
+/* --- Animations --- */
+@keyframes pulse-gold {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.2); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+.live-indicator {
     width: 8px;
     height: 8px;
-    background: var(--clr-live);
+    background-color: var(--color-gold);
     border-radius: 50%;
-    animation: pulse 1.5s infinite;
+    display: inline-block;
+    animation: pulse-gold 2s infinite ease-in-out;
 }
 
-/* ==========================================================================
-   5. ANIMATIONS
-   ========================================================================== */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+/* --- Utilities --- */
+.u-text-gold { color: var(--color-gold); }
+.u-text-muted { color: var(--color-text-sec); }
 
-@keyframes pulse {
-    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 75, 75, 0.7); }
-    70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(255, 75, 75, 0); }
-    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 75, 75, 0); }
-}
-
-.animate-fade-in {
-    animation: fadeInUp 0.8s var(--trans-smooth) forwards;
-}
-
-/* ==========================================================================
-   6. UTILITY CLASSES
-   ========================================================================= */
-.mt-1 { margin-top: var(--space-xs); }
-.mt-2 { margin-top: var(--space-sm); }
-.mt-4 { margin-top: var(--space-md); }
-.text-center { text-align: center; }
-.flex-center { display: flex; align-items: center; justify-content: center; }
-
-/* ==========================================================================
-   7. RESPONSIVE BREAKPOINTS
-   ========================================================================== */
-
-/* Tablet (768px) */
-@media (min-width: 768px) {
-    .grid-main {
-        grid-template-columns: repeat(2, 1fr);
-    }
+/* --- Responsive Design --- */
+@media (max-width: 1024px) {
+    .navbar__links { display: none; }
+    .hero__title { font-size: 2.5rem; }
     
-    .nav__mobile-toggle {
-        display: none;
+    .ranking-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
     }
 }
 
-/* Desktop (1024px) */
-@media (min-width: 1024px) {
-    .grid-main {
-        grid-template-columns: repeat(12, 1fr);
-    }
-
-    .sidebar {
-        grid-column: span 4;
-    }
-
-    .content-main {
-        grid-column: span 8;
-    }
-
-    .container {
-        padding: 0 var(--space-md);
-    }
-}
-
-/* Mobile Specific (Max 767px) */
-@media (max-width: 767px) {
-    .nav__list {
-        display: none; /* In production, implement a hamburger menu here */
-    }
+@media (max-width: 768px) {
+    .hero { padding: 60px 20px; }
     
-    .header {
-        height: 60px;
-    }
-
-    h1 {
-        font-size: 2rem;
+    .bracket {
+        grid-auto-flow: row;
+        justify-items: center;
     }
 }
