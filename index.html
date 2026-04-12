@@ -9,11 +9,13 @@
 
     <style>
         :root {
-            --bg-white: #ffffff;
-            --text-black: #000000;
-            --accent-gray: #f4f4f4;
-            --border-gray: #eeeeee;
-            --status-gray: #555555;
+            --bg-body: #f4f4f4;
+            --bg-panel: #ffffff;
+            --bg-dark: #1b1f23;
+            --accent-blue: #2d68ff;
+            --text-main: #121417;
+            --text-muted: #666666;
+            --border: #dddddd;
             --font-main: 'Play', sans-serif;
             --font-heading: 'Broaven oblique', 'Play', sans-serif;
         }
@@ -26,378 +28,260 @@
 
         body {
             font-family: var(--font-main);
-            background-color: var(--bg-white);
-            color: var(--text-black);
-            line-height: 1.6;
-            overflow-x: hidden;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.5;
         }
 
-        .container {
-            padding: 100px 10%;
-            width: 100%;
-        }
-
-        .bg-black { background-color: var(--text-black); }
-        .white { color: white; }
-
-        /* Навигация */
+        /* --- НАВИГАЦИЯ В СТИЛЕ HLTV --- */
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 5%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-gray);
+            padding: 0 10%;
+            height: 60px;
+            background: var(--bg-dark);
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
-        .logo-img { height: 50px; width: auto; }
+        .logo-text {
+            color: #fff;
+            font-family: var(--font-heading);
+            font-size: 24px;
+            text-decoration: none;
+        }
 
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 30px;
+            height: 100%;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: var(--text-black);
+            color: #bbb;
             font-weight: bold;
             text-transform: uppercase;
-            font-size: 13px;
-            letter-spacing: 1px;
+            font-size: 12px;
+            padding: 0 20px;
+            height: 60px;
+            display: flex;
+            align-items: center;
             transition: 0.3s;
         }
 
-        .nav-links a:hover { opacity: 0.5; }
-
-        /* Hero */
-        .hero {
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('photo1.png') no-repeat center center / cover;
+        .nav-links a:hover {
             color: #fff;
-            text-align: center;
+            background: rgba(255,255,255,0.1);
         }
 
-        .hero h1 {
-            font-family: var(--font-heading);
-            font-size: clamp(40px, 10vw, 90px);
-            line-height: 1;
-            margin-bottom: 15px;
-        }
-
-        .section-title {
-            font-family: var(--font-heading);
-            font-size: 38px;
-            text-transform: uppercase;
-            margin-bottom: 50px;
-            position: relative;
-        }
-
-        /* --- СОВРЕМЕННЫЕ НОВОСТИ --- */
-        .news-grid {
+        /* --- ГЛАВНЫЙ КОНТЕЙНЕР --- */
+        .main-layout {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
+            grid-template-columns: 1fr 350px;
+            gap: 20px;
+            padding: 20px 10%;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
-        .news-card {
-            text-decoration: none;
-            color: inherit;
-            display: flex;
-            flex-direction: column;
-            background: #fff;
-            border: 1px solid var(--border-gray);
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .news-card:hover {
-            transform: translateY(-10px);
-            border-color: #000;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
-        }
-
-        .news-image {
-            width: 100%;
-            height: 220px;
-            background: #f0f0f0; /* Заглушка, если нет фото */
-            object-fit: cover;
-        }
-
-        .news-content { padding: 30px; }
-
-        .news-date {
-            font-size: 12px;
-            font-weight: bold;
-            color: #aaa;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .news-card h3 {
-            font-size: 22px;
-            margin-bottom: 15px;
-            line-height: 1.3;
-        }
-
-        .news-card p {
-            color: #666;
-            font-size: 15px;
+        .section-box {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
             margin-bottom: 20px;
         }
 
-        .read-more {
-            font-weight: bold;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* --- СОВРЕМЕННЫЕ ТУРНИРЫ --- */
-        .tournament-list {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .t-item {
-            display: grid;
-            grid-template-columns: 120px 1fr 180px auto;
-            align-items: center;
-            padding: 30px;
-            background: #111;
-            border: 1px solid #222;
-            color: white;
-            transition: 0.3s ease;
-            cursor: pointer;
-        }
-
-        .t-item:hover {
-            background: #1a1a1a;
-            border-color: #444;
-            transform: translateX(10px);
-        }
-
-        .t-status {
-            font-size: 11px;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-weight: bold;
-            text-align: center;
-            width: fit-content;
-        }
-
-        .t-status.ended {
-            background: transparent;
-            border: 1px solid #444;
-            color: #777;
-        }
-
-        .t-name-wrapper {
-            padding-left: 20px;
-        }
-
-        .t-name {
-            font-size: 20px;
-            font-weight: bold;
-            display: block;
-        }
-
-        .t-desc {
-            font-size: 13px;
-            color: #666;
-        }
-
-        .t-prize-box {
-            text-align: right;
-            padding-right: 40px;
-        }
-
-        .t-prize-label {
-            display: block;
-            font-size: 10px;
-            color: #555;
-            text-transform: uppercase;
-        }
-
-        .t-prize {
-            font-family: var(--font-heading);
-            font-size: 24px;
+        .section-header {
+            background: #2a2f35;
             color: #fff;
-        }
-
-        .t-arrow {
-            font-size: 24px;
-            color: #333;
-        }
-
-        /* Рейтинг */
-        .ranking-header {
-            display: grid;
-            grid-template-columns: 80px 1fr 120px;
-            padding: 15px 25px;
+            padding: 10px 20px;
+            font-size: 13px;
             font-weight: bold;
-            color: #888;
-            border-bottom: 2px solid #000;
+            text-transform: uppercase;
+            display: flex;
+            justify-content: space-between;
         }
 
-        .ranking-row {
+        /* --- НОВОСТИ (Центральная колонка) --- */
+        .news-featured {
             display: grid;
-            grid-template-columns: 80px 1fr 120px;
-            align-items: center;
-            padding: 20px 25px;
-            background: var(--accent-gray);
-            margin-top: 10px;
-            border-radius: 4px;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            background: var(--border);
         }
 
-        .rank-num {
-            font-family: var(--font-heading);
-            font-size: 20px;
+        .news-item {
+            background: #fff;
+            padding: 20px;
+            text-decoration: none;
+            color: inherit;
+            transition: 0.2s;
+        }
+
+        .news-item:hover { background: #fafafa; }
+
+        .news-item .date { font-size: 11px; color: var(--text-muted); }
+        .news-item h3 { font-size: 18px; margin: 8px 0; line-height: 1.2; }
+        .news-item p { font-size: 14px; color: #555; }
+
+        /* --- ТУРНИРЫ (Вид списка) --- */
+        .t-row {
+            display: grid;
+            grid-template-columns: 80px 1fr 100px auto;
+            align-items: center;
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--border);
+            text-decoration: none;
+            color: inherit;
+            font-size: 14px;
+        }
+
+        .t-row:hover { background: #f9f9f9; }
+
+        .t-status-label {
+            font-size: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #999;
+        }
+
+        .t-name { font-weight: bold; }
+        .t-prize-val { font-weight: bold; text-align: right; }
+
+        /* --- РЕЙТИНГ (Правая колонка) --- */
+        .rank-list { padding: 10px 0; }
+        .rank-item {
+            display: grid;
+            grid-template-columns: 40px 1fr 60px;
+            padding: 8px 20px;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+        .rank-item:last-child { border-bottom: none; }
+        .rank-pos { font-weight: bold; color: var(--accent-blue); }
+        .rank-team { font-weight: bold; font-size: 13px; }
+        .rank-points { font-size: 12px; text-align: right; color: #888; }
+
+        /* Hero banner */
+        .top-banner {
             background: #000;
             color: #fff;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
+            padding: 40px 10%;
+            text-align: center;
+            margin-bottom: 20px;
         }
-
-        .team-info { display: flex; align-items: center; gap: 20px; }
-        .team-logo { width: 40px; height: 40px; background: #fff; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; font-size: 10px; }
-        .rank-pts { font-family: var(--font-heading); font-size: 22px; text-align: right; }
 
         footer {
-            background: #000;
-            color: #fff;
-            padding: 80px 10%;
+            background: var(--bg-dark);
+            color: #777;
+            padding: 40px 10%;
             text-align: center;
+            font-size: 12px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 1000px) {
+            .main-layout { grid-template-columns: 1fr; }
+            .news-featured { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
-        <div class="logo">
-            <img src="logo.png" alt="GWE" class="logo-img">
-        </div>
+        <a href="index.html" class="logo-text">GWE</a>
         <ul class="nav-links">
-            <li><a href="#news">Новости</a></li>
+            <li><a href="#">Новости</a></li>
             <li><a href="#tournaments">Турниры</a></li>
             <li><a href="#ranking">Рейтинг</a></li>
-            <li><a href="#regulations">Регламент</a></li>
+            <li><a href="#">Результаты</a></li>
         </ul>
     </nav>
 
-    <header class="hero">
-        <div class="container">
-            <h1>GARNIR WORLD ESPORTS</h1>
-            <p style="letter-spacing: 5px; text-transform: uppercase; font-size: 14px; opacity: 0.8;">The Future of Competitive Gaming</p>
-        </div>
+    <header class="top-banner">
+        <h1 style="font-family: var(--font-heading); font-size: 42px;">GARNIR WORLD ESPORTS</h1>
+        <p style="opacity: 0.5; font-size: 12px; text-transform: uppercase; letter-spacing: 2px;">Professional CS2 Tournament Circuit</p>
     </header>
 
-    <main>
-        <section id="news" class="container">
-            <h2 class="section-title">Последние новости</h2>
-            <div class="news-grid">
-                <a href="#" class="news-card">
-                    <div class="news-image"></div> <div class="news-content">
-                        <span class="news-date">11 апреля, 2026</span>
-                        <h3>Анонс весеннего сплита: Кто станет легендой?</h3>
-                        <p>Начинаем регистрацию на самый масштабный открытый турнир этого сезона с призовым фондом в $5,000.</p>
-                        <div class="read-more">Читать далее →</div>
-                    </div>
-                </a>
-                <a href="#" class="news-card">
-                    <div class="news-image"></div>
-                    <div class="news-content">
-                        <span class="news-date">09 апреля, 2026</span>
-                        <h3>Обновление регламента GWE 2.1</h3>
-                        <p>Мы пересмотрели правила технического тайм-аута и выбора карт для более честной игры.</p>
-                        <div class="read-more">Читать далее →</div>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-        <section id="tournaments" class="container bg-black">
-            <h2 class="section-title white">История турниров</h2>
-            <div class="tournament-list">
-    <a href="tournament-page.html" class="t-item" style="text-decoration: none;">
-        <span class="t-status ended">Завершен</span>
-        <div class="t-name-wrapper">
-            <span class="t-name">Turnir GARNIR 1</span>
-            <span class="t-desc">Открытая квалификация • CS2</span>
-        </div>
-        <div class="t-prize-box">
-            <span class="t-prize-label">Призовой фонд</span>
-            <span class="t-prize">1500 RUB</span>
-        </div>
-        <div class="t-arrow">›</div>
-    </a>
-
-    <a href="tournament-page.html" class="t-item" style="text-decoration: none;">
-        <span class="t-status ended">Завершен</span>
-        <div class="t-name-wrapper">
-            <span class="t-name">GRT 2026 Season 1</span>
-            <span class="t-desc">Pro League • LAN Bucharest</span>
-        </div>
-        <div class="t-prize-box">
-            <span class="t-prize-label">Призовой фонд</span>
-            <span class="t-prize">$15,000</span>
-        </div>
-        <div class="t-arrow">›</div>
-    </a>
-</div>
-
-            </div>
-        </section>
-
-        <section id="ranking" class="container">
-            <h2 class="section-title">Мировой рейтинг</h2>
-            <div class="ranking-container">
-                <div class="ranking-header">
-                    <div>#</div>
-                    <div>Команда</div>
-                    <div style="text-align: right;">Очки</div>
+    <div class="main-layout">
+        <main>
+            <section class="section-box" id="news">
+                <div class="section-header">Последние новости <span style="color: #888;">Все новости →</span></div>
+                <div class="news-featured">
+                    <a href="#" class="news-item">
+                        <span class="date">12 Апр - 14:30</span>
+                        <h3>Весенний сплит GWE: Регистрация открыта</h3>
+                        <p>Присоединяйтесь к крупнейшему онлайн-событию апреля.</p>
+                    </a>
+                    <a href="#" class="news-item">
+                        <span class="date">11 Апр - 09:15</span>
+                        <h3>Обновление правил 2.1</h3>
+                        <p>Технические тайм-ауты и новые правила выбора сторон.</p>
+                    </a>
                 </div>
-                <div class="ranking-row">
-                    <div class="rank-num">1</div>
-                    <div class="team-info">
-                        <div class="team-logo">TS</div>
-                        <span style="font-weight: bold;">Team Spirit</span>
-                    </div>
-                    <div class="rank-pts">1000</div>
+            </section>
+
+            <section class="section-box" id="tournaments">
+                <div class="section-header">Ближайшие и текущие турниры</div>
+                <div class="tourney-list">
+                    <a href="tournament-page.html" class="t-row">
+                        <span class="t-status-label" style="color: #e67e22;">LIVE</span>
+                        <span class="t-name">Turnir GARNIR 1</span>
+                        <span class="t-prize-val">1500 RUB</span>
+                        <span style="color: #ccc;">›</span>
+                    </a>
+                    <a href="#" class="t-row">
+                        <span class="t-status-label">Finished</span>
+                        <span class="t-name">GWE Masters: Rio 2026</span>
+                        <span class="t-prize-val">$15,000</span>
+                        <span style="color: #ccc;">›</span>
+                    </a>
+                    <a href="#" class="t-row">
+                        <span class="t-status-label">Upcoming</span>
+                        <span class="t-name">Season 1 Qualifiers</span>
+                        <span class="t-prize-val">Points</span>
+                        <span style="color: #ccc;">›</span>
+                    </a>
                 </div>
-                <div class="ranking-row">
-                    <div class="rank-num">2</div>
-                    <div class="team-info">
-                        <div class="team-logo">FZ</div>
-                        <span style="font-weight: bold;">FaZe Clan</span>
+            </section>
+        </main>
+
+        <aside>
+            <section class="section-box" id="ranking">
+                <div class="section-header">Мировой рейтинг</div>
+                <div class="rank-list">
+                    <div class="rank-item">
+                        <span class="rank-pos">1.</span>
+                        <span class="rank-team">Team Spirit</span>
+                        <span class="rank-points">1000</span>
                     </div>
-                    <div class="rank-pts">950</div>
+                    <div class="rank-item">
+                        <span class="rank-pos">2.</span>
+                        <span class="rank-team">FaZe Clan</span>
+                        <span class="rank-points">945</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank-pos">3.</span>
+                        <span class="rank-team">G2 Esports</span>
+                        <span class="rank-points">880</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank-pos">4.</span>
+                        <span class="rank-team">NaVi</span>
+                        <span class="rank-points">810</span>
+                    </div>
                 </div>
-            </div>
-        </section>
-    </main>
+                <div style="padding: 10px; text-align: center; border-top: 1px solid #eee;">
+                    <a href="#" style="font-size: 11px; text-transform: uppercase; color: var(--accent-blue); font-weight: bold; text-decoration: none;">Полный рейтинг</a>
+                </div>
+            </section>
+        </aside>
+    </div>
 
     <footer>
-        <p style="font-family: var(--font-heading); font-size: 24px; margin-bottom: 20px;">GWE</p>
-        <p style="font-size: 12px; opacity: 0.5;">&copy; 2026 Garnir World Esports. All rights reserved.</p>
+        <p>&copy; 2026 Garnir World Esports • Official Tournament Platform</p>
     </footer>
 
 </body>
