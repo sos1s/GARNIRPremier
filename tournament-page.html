@@ -7,144 +7,163 @@
     <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #1b1f23;
-            --panel-dark: #23272d;
-            --accent-blue: #2d68ff;
-            --text-light: #e1e1e1;
+            --bg-main: #ffffff;
+            --bg-dark: #000000;
+            --panel-light: #f8f8f8;
+            --accent: #000000;
+            --text-main: #000000;
+            --text-muted: #888888;
+            --border-color: #eeeeee;
             --font-main: 'Play', sans-serif;
             --font-heading: 'Broaven oblique', 'Play', sans-serif;
         }
 
         body {
             font-family: var(--font-main);
-            background: #121417; /* Темный фон всей страницы */
-            color: var(--text-light);
+            background: var(--bg-main);
+            color: var(--text-main);
             margin: 0;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* --- ХЕДЕР В СТИЛЕ IEM --- */
+        /* --- ХЕДЕР --- */
         .tournament-banner {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), 
-                        url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=2070') no-repeat center/cover;
-            padding: 40px 10%;
+            background: var(--bg-dark);
+            color: #fff;
+            padding: 60px 10%;
             text-align: center;
-            border-bottom: 2px solid var(--accent-blue);
+            position: relative;
         }
-
-        .event-logos {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            margin-bottom: 10px;
-        }
-
-        .event-logos img { height: 60px; filter: brightness(0) invert(1); }
 
         .event-title {
             font-family: var(--font-heading);
-            font-size: 36px;
-            margin: 10px 0;
+            font-size: clamp(32px, 5vw, 48px);
+            margin: 15px 0;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
         }
 
         .status-badge {
-            background: #47535f;
-            color: #fff;
-            padding: 4px 12px;
-            font-size: 11px;
+            display: inline-block;
+            border: 1px solid #fff;
+            padding: 4px 15px;
+            font-size: 10px;
             text-transform: uppercase;
             font-weight: bold;
-            border-radius: 3px;
+            letter-spacing: 1px;
         }
 
-        /* --- ТАБЫ НАВИГАЦИИ --- */
+        /* --- НАВИГАЦИЯ --- */
         .tourney-nav {
-            background: var(--panel-dark);
+            background: var(--bg-main);
             display: flex;
             justify-content: center;
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .nav-tab {
-            padding: 15px 40px;
-            color: #888;
+            padding: 20px 40px;
+            color: var(--text-muted);
             text-decoration: none;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 13px;
             text-transform: uppercase;
-            transition: 0.3s;
+            transition: 0.2s;
         }
 
         .nav-tab.active {
-            color: #fff;
-            background: #2d323a;
-            box-shadow: inset 0 -3px 0 var(--accent-blue);
+            color: var(--text-main);
+            box-shadow: inset 0 -2px 0 var(--bg-dark);
         }
 
-        /* --- ПАНЕЛЬ ИНФОРМАЦИИ --- */
+        /* --- ИНФО-ПАНЕЛЬ (Без Location) --- */
         .quick-info {
-            background: var(--bg-dark);
+            background: var(--panel-light);
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            padding: 20px 10%;
-            border-bottom: 1px solid #333;
+            grid-template-columns: repeat(3, 1fr); /* Изменено на 3 колонки */
+            padding: 25px 10%;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .info-cell { text-align: center; border-right: 1px solid #333; }
+        .info-cell { text-align: center; border-right: 1px solid #ddd; }
         .info-cell:last-child { border-right: none; }
 
-        .info-label { display: block; font-size: 11px; color: #777; text-transform: uppercase; margin-bottom: 5px; }
-        .info-value { display: block; font-size: 16px; font-weight: bold; }
+        .info-label { display: block; font-size: 10px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 5px; letter-spacing: 1px; }
+        .info-value { display: block; font-size: 18px; font-weight: 700; }
 
-        /* --- СЕТКА И КОНТЕНТ --- */
-        .content-section { padding: 40px 10%; }
+        /* --- СЕТКА --- */
+        .content-section { padding: 60px 10%; }
 
         .section-header {
-            background: #2a2f35;
-            padding: 10px 20px;
-            font-size: 14px;
-            font-weight: bold;
+            font-family: var(--font-heading);
+            font-size: 18px;
             text-transform: uppercase;
-            border-left: 4px solid var(--accent-blue);
-            margin-bottom: 20px;
+            border-bottom: 2px solid var(--bg-dark);
+            padding-bottom: 10px;
+            margin-bottom: 40px;
+            display: inline-block;
         }
 
         .bracket-container {
             display: flex;
-            gap: 30px;
+            gap: 40px;
             overflow-x: auto;
-            padding: 20px 0;
+            padding: 10px 0;
+        }
+
+        .round-name {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
         }
 
         .match-box {
-            background: var(--panel-dark);
-            border: 1px solid #333;
-            width: 220px;
-            margin-bottom: 20px;
+            background: #fff;
+            border: 1px solid var(--border-color);
+            width: 240px;
+            margin-bottom: 25px;
+            transition: transform 0.2s;
         }
 
+        .match-box:hover { border-color: var(--bg-dark); }
+
         .team-row {
-            padding: 10px 15px;
+            padding: 12px 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .team-row:last-child { border-bottom: none; }
-        .team-row.winner { background: #2d323a; color: #fff; }
-        .score { font-weight: bold; color: var(--accent-blue); }
+        .team-row.winner { background: var(--panel-light); font-weight: bold; }
+        
+        .score { font-weight: bold; font-size: 14px; }
 
         .back-link {
             position: absolute;
-            top: 20px;
+            top: 25px;
             left: 5%;
             color: #fff;
             text-decoration: none;
-            font-size: 12px;
-            opacity: 0.5;
+            font-size: 11px;
+            letter-spacing: 1px;
+            opacity: 0.6;
+            transition: 0.3s;
+        }
+        .back-link:hover { opacity: 1; }
+
+        footer {
+            padding: 50px 10%;
+            text-align: center;
+            background: var(--panel-light);
+            color: var(--text-muted);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
     </style>
 </head>
@@ -152,9 +171,6 @@
 
     <header class="tournament-banner">
         <a href="index.html" class="back-link">← BACK TO LIST</a>
-        <div class="event-logos">
-            <h2 style="font-family: var(--font-heading);">GWE | MAJOR</h2>
-        </div>
         <div class="status-badge">Upcoming</div>
         <h1 class="event-title">IEM Rio 2026</h1>
     </header>
@@ -168,7 +184,7 @@
     <div class="quick-info">
         <div class="info-cell">
             <span class="info-label">Date</span>
-            <span class="info-value">Apr 13th - Apr 19th 2026</span>
+            <span class="info-value">13.04 — 19.04.2026</span>
         </div>
         <div class="info-cell">
             <span class="info-label">Prize pool</span>
@@ -178,18 +194,14 @@
             <span class="info-label">Teams</span>
             <span class="info-value">16</span>
         </div>
-        <div class="info-cell">
-            <span class="info-label">Location</span>
-            <span class="info-value">🇧🇷 Rio de Janeiro, Brazil</span>
-        </div>
     </div>
 
     <main class="content-section">
-        <div class="section-header">Playoffs - Single Elimination Bracket</div>
+        <div class="section-header">Playoffs Bracket</div>
 
         <div class="bracket-container">
             <div class="bracket-column">
-                <div style="font-size: 11px; color: #555; margin-bottom: 10px; text-align: center;">SEMI-FINALS</div>
+                <div class="round-name">Semi-Finals</div>
                 <div class="match-box">
                     <div class="team-row winner">
                         <span>Team Spirit</span>
@@ -213,8 +225,8 @@
             </div>
 
             <div class="bracket-column">
-                <div style="font-size: 11px; color: #555; margin-bottom: 10px; text-align: center;">GRAND FINAL</div>
-                <div class="match-box" style="margin-top: 50px; border-color: var(--accent-blue);">
+                <div class="round-name">Grand Final</div>
+                <div class="match-box" style="margin-top: 55px; border: 2px solid var(--bg-dark);">
                     <div class="team-row">
                         <span>Team Spirit</span>
                         <span class="score">-</span>
@@ -228,8 +240,8 @@
         </div>
     </main>
 
-    <footer style="padding: 40px; text-align: center; color: #444; font-size: 12px; border-top: 1px solid #222;">
-        &copy; 2026 Garnir World Esports • Powered by GWE Engine
+    <footer>
+        &copy; 2026 Garnir World Esports • Official Tournament Platform
     </footer>
 
 </body>
