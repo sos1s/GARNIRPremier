@@ -3,249 +3,256 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GWE | HLTV Tournament Page</title>
+    <title>GWE | EWC EDITION</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            /* Точная палитра со скриншотов */
-            --hltv-page-bg: #1b1f23;       /* Фон всей страницы */
-            --hltv-block-bg: #2d3844;      /* Фон заголовков и табов */
-            --hltv-content-bg: #252c33;    /* Фон контента внутри блоков */
-            --hltv-border: #363f4b;        /* Цвет границ */
-            --hltv-blue: #3b76ad;          /* Акцентный синий */
-            --hltv-text-bright: #ffffff;   /* Белый текст */
-            --hltv-text-dim: #929a9e;      /* Серый текст для инфо */
+            /* EWC Aesthetic: Pure Black & White */
+            --ewc-black: #000000;
+            --ewc-white: #ffffff;
+            --ewc-gray: #111111;
+            --ewc-border: #222222;
+            --ewc-accent: #ffffff;
             
             --font-main: 'Play', sans-serif;
+            --font-heading: 'Broaven oblique', 'Play', sans-serif; /* Твой кастомный шрифт */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
             font-family: var(--font-main);
-            background-color: var(--hltv-page-bg);
-            color: var(--hltv-text-bright);
-            margin: 0;
-            padding: 0;
+            background-color: var(--ewc-black);
+            color: var(--ewc-white);
+            line-height: 1.6;
         }
 
-        .main-wrapper {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            display: grid;
-            grid-template-columns: 1fr 300px; /* Основной контент + Сайдбар */
-            gap: 2px; /* Имитация тонких перегородок HLTV */
-        }
-
-        /* --- ВЕРХНЯЯ ПЛАШКА ТУРНИРА (как на скрин 1) --- */
-        .event-header {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('event-bg.jpg') center/cover;
-            height: 200px;
+        /* --- Контейнер для картинок (Minimalist) --- */
+        .img-container {
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center;
-            border-bottom: 1px solid var(--hltv-border);
+            overflow: hidden;
+            background: var(--ewc-gray);
+            border: 1px solid var(--ewc-border);
         }
-
-        .event-header h1 { font-size: 32px; text-transform: uppercase; margin-bottom: 5px; }
-
-        /* Табы под шапкой */
-        .event-tabs {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            background: var(--hltv-block-bg);
-        }
-
-        .tab {
-            padding: 12px;
-            text-align: center;
-            text-transform: uppercase;
-            font-weight: bold;
-            font-size: 14px;
-            color: var(--hltv-text-dim);
-            text-decoration: none;
-            border-right: 1px solid var(--hltv-border);
-        }
-
-        .tab.active {
-            background: var(--hltv-content-bg);
-            color: white;
-            border-bottom: 2px solid var(--hltv-blue);
-        }
-
-        /* Инфо-панель (Date, Prize, Teams) */
-        .event-info-bar {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            background: var(--hltv-content-bg);
-            padding: 15px;
-            border-bottom: 1px solid var(--hltv-border);
-        }
-
-        .info-item { display: flex; flex-direction: column; font-size: 13px; }
-        .info-label { color: var(--hltv-text-dim); margin-bottom: 5px; }
-        .info-value { font-weight: bold; }
-
-        /* --- ГРУППОВОЙ ЭТАП / АККОРДЕОНЫ (как на скрин 1) --- */
-        .collapsible-section {
-            background: var(--hltv-block-bg);
-            margin-top: 10px;
-        }
-
-        .collapsible-header {
-            padding: 12px 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: 14px;
-        }
-
-        .collapsible-content {
-            background: var(--hltv-content-bg);
-            padding: 10px;
-            border-top: 1px solid var(--hltv-border);
-        }
-
-        .team-row {
-            display: flex;
-            align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px solid var(--hltv-border);
-        }
-
-        .team-logo { width: 25px; height: 25px; margin-right: 15px; background: #eee; }
-
-        /* --- САЙДБАР (как на скрин 2) --- */
-        .sidebar-block {
-            background: var(--hltv-content-bg);
-            border: 1px solid var(--hltv-border);
-            margin-bottom: 15px;
-        }
-
-        .sidebar-title {
-            background: var(--hltv-block-bg);
-            padding: 8px 12px;
-            font-size: 12px;
-            font-weight: bold;
-            text-transform: uppercase;
-            color: var(--hltv-text-dim);
-        }
-
-        .match-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 12px;
-            font-size: 13px;
-            border-bottom: 1px solid var(--hltv-border);
-        }
-
-        .match-team { display: flex; align-items: center; gap: 8px; }
-        .score { color: #4CAF50; font-weight: bold; } /* Зеленый счет как на hltv */
-
-        /* Рекламный баннер */
-        .ad-box {
+        .img-container img {
             width: 100%;
-            height: 100px;
-            background: #f39c12; /* Оранжевый как на скриншоте с Hellcase */
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%); /* Фирменный стиль EWC */
+            transition: 0.4s;
+        }
+        .img-container:hover img { filter: grayscale(0%); }
+
+        /* Навигация */
+        .navbar {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            margin: 15px 0;
-            font-weight: bold;
-            color: black;
-            text-decoration: none;
+            padding: 0 5%;
+            background: var(--ewc-black);
+            height: 70px;
+            border-bottom: 1px solid var(--ewc-border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        @media (max-width: 800px) {
-            .main-wrapper { grid-template-columns: 1fr; }
-            .event-info-bar { grid-template-columns: 1fr 1fr; gap: 10px; }
+        .logo-img { height: 40px; width: auto; }
+
+        .nav-links { display: flex; list-style: none; gap: 40px; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--ewc-white);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+        .nav-links a:hover { color: #aaa; }
+
+        /* Layout */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 20px;
+            gap: 40px;
+        }
+
+        /* Секции */
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 32px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--ewc-white);
+            padding-left: 15px;
+        }
+
+        /* Новости (Large Cards) */
+        .news-card {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            margin-bottom: 40px;
+            border: 1px solid var(--ewc-border);
+            transition: 0.3s;
+        }
+        .news-card:hover { border-color: var(--ewc-white); }
+
+        .news-img-box { height: 400px; width: 100%; }
+        .news-body { padding: 30px; }
+        .news-category { 
+            font-size: 12px; 
+            text-transform: uppercase; 
+            color: #666; 
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .news-card h2 { 
+            font-family: var(--font-heading); 
+            font-size: 28px; 
+            margin-bottom: 15px; 
+        }
+
+        /* Сайдбар (Matches/Ranking) */
+        .sidebar-box {
+            background: var(--ewc-gray);
+            padding: 25px;
+            border: 1px solid var(--ewc-border);
+            margin-bottom: 30px;
+        }
+        .sidebar-box h4 {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .row-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--ewc-border);
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .row-item:last-child { border: none; }
+        .tag {
+            font-size: 10px;
+            padding: 2px 8px;
+            border: 1px solid var(--ewc-white);
+            text-transform: uppercase;
+        }
+
+        footer {
+            padding: 100px 5%;
+            text-align: center;
+            border-top: 1px solid var(--ewc-border);
+            margin-top: 100px;
+            font-family: var(--font-heading);
+            letter-spacing: 5px;
+            font-size: 20px;
+        }
+
+        @media (max-width: 1000px) {
+            .main-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <div class="main-wrapper">
+    <nav class="navbar">
+        <div class="logo">
+            <img src="logo.png" alt="GWE" class="logo-img">
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Tournaments</a></li>
+            <li><a href="#">Matches</a></li>
+            <li><a href="#">News</a></li>
+            <li><a href="#">Ranking</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-grid">
         
         <main>
-            <div class="section-box">
-                <div class="event-header">
-                    <h1>IEM RIO 2026</h1>
+            <h2 class="section-title">Latest Updates</h2>
+            
+            <a href="#" class="news-card">
+                <div class="img-container news-img-box">
+                    <img src="news_hero.jpg" alt="EWC Style">
                 </div>
-
-                <div class="event-tabs">
-                    <a href="#" class="tab active">Overview</a>
-                    <a href="#" class="tab">Matches</a>
-                    <a href="#" class="tab">Fantasy</a>
+                <div class="news-body">
+                    <span class="news-category">Championship</span>
+                    <h2>GWE World Finals 2026: The Road to Victory</h2>
+                    <p>Experience the most intense CS2 competition of the year. 16 teams, one trophy.</p>
                 </div>
+            </a>
 
-                <div class="event-info-bar">
-                    <div class="info-item">
-                        <span class="info-label">Date</span>
-                        <span class="info-value">Apr 13th - Apr 19th</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Prize pool</span>
-                        <span class="info-value">$1,000,000</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Teams</span>
-                        <span class="info-value">16</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Location</span>
-                        <span class="info-value">🇧🇷 Rio de Janeiro</span>
-                    </div>
+            <a href="#" class="news-card">
+                <div class="img-container news-img-box" style="height: 250px;">
+                    <img src="news2.jpg" alt="">
                 </div>
-
-                <a href="#" class="ad-box">
-                    GRAB 3 FREE CASES • CODE: USHELL
-                </a>
-
-                <div class="collapsible-section">
-                    <div class="collapsible-header">
-                        Playoffs <span>▼</span>
-                    </div>
+                <div class="news-body">
+                    <span class="news-category">Patch Notes</span>
+                    <h2>Regulation Changes for Season 3</h2>
                 </div>
-
-                <div class="collapsible-section">
-                    <div class="collapsible-header">
-                        Group A <span>▲</span>
-                    </div>
-                    <div class="collapsible-content">
-                        <div class="team-row"><div class="team-logo"></div> Team Spirit</div>
-                        <div class="team-row"><div class="team-logo"></div> FaZe Clan</div>
-                        <div class="team-row"><div class="team-logo"></div> NAVI</div>
-                    </div>
-                </div>
-            </div>
+            </a>
         </main>
 
         <aside>
-            <div class="sidebar-block">
-                <div class="sidebar-title">Today's Matches</div>
-                <div class="match-item">
-                    <div class="match-team">Lavked vs Bebop</div>
-                    <span class="score">13:7</span>
+            <div class="sidebar-box">
+                <h4>Live Matches</h4>
+                <div class="row-item">
+                    <span>Spirit vs FaZe</span>
+                    <span class="tag">Live</span>
                 </div>
-                <div class="match-item">
-                    <div class="match-team">AaB vs WAZABI</div>
-                    <span class="score">12:6</span>
+                <div class="row-item">
+                    <span>NAVI vs G2</span>
+                    <span style="color: #444;">18:00</span>
                 </div>
             </div>
 
-            <div class="sidebar-block">
-                <div class="sidebar-title">Recent Activity</div>
-                <div class="match-item" style="color: var(--hltv-text-dim);">Fnatic situation...</div>
-                <div class="match-item" style="color: var(--hltv-text-dim);">donk dominates...</div>
-                <div class="match-item" style="color: var(--hltv-text-dim);">s1mple news...</div>
+            <div class="sidebar-box">
+                <h4>Top Teams</h4>
+                <div class="row-item">
+                    <span>01 Team Spirit</span>
+                    <span>1000</span>
+                </div>
+                <div class="row-item">
+                    <span>02 FaZe Clan</span>
+                    <span>945</span>
+                </div>
+                <div class="row-item">
+                    <span>03 NAVI</span>
+                    <span>890</span>
+                </div>
+            </div>
+
+            <div class="img-container" style="height: 400px; border-style: dashed; color: #333; display: flex; align-items: center; text-align: center; padding: 20px;">
+                <span>ADVERTISEMENT<br>SPACE</span>
             </div>
         </aside>
 
     </div>
+
+    <footer>
+        GARNIR WORLD ESPORTS
+    </footer>
 
 </body>
 </html>
