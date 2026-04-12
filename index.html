@@ -3,182 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GWE | Ultimate Interactive</title>
+    <title>GWE | Black & Gold Interactive</title>
     <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --b: #000; --w: #fff; --g: #c5a059; --bg: #f8f8f8; --brd: #eee;
+            --b: #000000; --w: #ffffff; --g: #c5a059; --bg: #ffffff; --brd: #e0e0e0;
             --f: 'Play', sans-serif;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: default; }
-        body { font-family: var(--f); background: var(--bg); color: var(--b); overflow-x: hidden; }
+        body { font-family: var(--f); background: var(--bg); color: var(--b); line-height: 1.5; }
         
-        /* Интерактивные элементы */
-        .clickable { cursor: pointer !important; transition: 0.2s; }
-        .clickable:hover { opacity: 0.8; border-color: var(--g) !important; }
+        /* Интерактивность */
+        .clickable { cursor: pointer !important; transition: all 0.2s ease; }
+        .clickable:hover { border-color: var(--g) !important; transform: translateY(-2px); }
 
         /* HEADER */
         header {
             background: var(--b); padding: 15px 5%;
-            display: grid; grid-template-columns: 150px 1fr 350px;
-            align-items: center; position: sticky; top: 0; z-index: 100;
+            display: grid; grid-template-columns: 180px 1fr 320px;
+            align-items: center; position: sticky; top: 0; z-index: 1000;
+            border-bottom: 2px solid var(--g);
         }
-        .logo { color: var(--w); font-weight: 800; font-size: 24px; letter-spacing: 1px; }
+        .logo { color: var(--w); font-weight: 800; font-size: 26px; letter-spacing: 2px; }
         .logo span { color: var(--g); }
 
-        .nav { display: flex; justify-content: center; gap: 30px; }
+        .nav { display: flex; justify-content: center; gap: 40px; }
         .t-btn { 
-            color: #666; font-weight: 700; text-transform: uppercase; font-size: 12px; 
-            padding: 10px; border-bottom: 2px solid transparent; 
+            color: #888; font-weight: 700; text-transform: uppercase; font-size: 13px; 
+            padding: 10px 0; border-bottom: 2px solid transparent; letter-spacing: 1px;
         }
         .t-btn.active { color: var(--w); border-bottom-color: var(--g); }
+        .t-btn:hover { color: var(--g); }
 
-        .s-box { position: relative; }
         #mainSearch {
-            width: 100%; padding: 10px 15px; background: #111; border: 1px solid #333;
-            color: var(--w); border-radius: 4px; outline: none;
+            width: 100%; padding: 12px 15px; background: #111; border: 1px solid #333;
+            color: var(--w); border-radius: 4px; outline: none; font-family: var(--f);
         }
         #mainSearch:focus { border-color: var(--g); }
 
-        /* LAYOUT */
-        .wrap {
-            max-width: 1400px; margin: 25px auto; padding: 0 20px;
-            display: grid; grid-template-columns: 300px 1fr 320px; gap: 25px;
+        /* MAIN LAYOUT */
+        .wrapper {
+            max-width: 1440px; margin: 30px auto; padding: 0 20px;
+            display: grid; grid-template-columns: 320px 1fr 320px; gap: 30px;
         }
 
-        .box { background: var(--w); border: 1px solid var(--brd); margin-bottom: 20px; }
+        .box { background: var(--w); border: 1px solid var(--brd); margin-bottom: 25px; overflow: hidden; }
         .b-head { 
-            padding: 12px; background: var(--b); color: var(--w); 
+            padding: 12px 15px; background: var(--b); color: var(--w); 
             font-size: 11px; font-weight: 800; text-transform: uppercase;
-            display: flex; justify-content: space-between;
+            display: flex; justify-content: space-between; align-items: center;
         }
 
-        /* CONTENT */
+        /* CONTENT ITEMS */
         .item { 
-            display: flex; align-items: center; padding: 12px; 
+            display: flex; align-items: center; padding: 15px; 
             border-bottom: 1px solid var(--brd); font-size: 14px; 
         }
-        .item:last-child { border: none; }
-        .g-txt { color: var(--g); font-weight: bold; margin-right: 10px; }
+        .item:hover { background: #fafafa; }
+        .g-txt { color: var(--g); font-weight: bold; margin-right: 12px; }
 
+        /* NEWS GRID */
         .news-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .n-card { background: var(--w); border: 1px solid var(--brd); position: relative; }
-        .n-img { height: 180px; background: #222; overflow: hidden; }
-        .n-body { padding: 15px; }
-        .n-body h3 { font-size: 16px; text-transform: uppercase; margin-bottom: 8px; }
+        .n-card { border: 1px solid var(--brd); background: var(--w); }
+        .n-img { height: 200px; background: #111; display: flex; align-items: center; justify-content: center; color: var(--g); font-weight: bold; }
+        .n-body { padding: 20px; }
+        .n-body h3 { font-size: 18px; text-transform: uppercase; margin-bottom: 10px; }
+        .n-body p { color: #666; font-size: 14px; }
 
-        /* MODAL (Детальный просмотр) */
+        /* MODAL */
         .modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); display: none; z-index: 1000;
+            background: rgba(0,0,0,0.95); display: none; z-index: 2000;
             justify-content: center; align-items: center; padding: 20px;
         }
         .m-cont { 
-            background: var(--w); max-width: 600px; width: 100%; padding: 40px; 
-            position: relative; animation: slideUp 0.3s;
+            background: var(--w); max-width: 700px; width: 100%; padding: 50px; 
+            position: relative; border-top: 5px solid var(--g);
         }
-        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .m-close { position: absolute; top: 15px; right: 20px; font-size: 24px; font-weight: bold; }
+        .m-close { position: absolute; top: 20px; right: 25px; font-size: 30px; font-weight: bold; cursor: pointer; }
 
-        /* SEARCH HIGHLIGHT */
-        .highlight { background: var(--g); color: var(--b); font-weight: bold; }
-        .no-results { grid-column: 1/-1; text-align: center; padding: 40px; color: #999; }
+        /* PARTNERS FOOTER */
+        .p-footer {
+            background: #fff; border-top: 1px solid var(--brd); padding: 50px 5%;
+            display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px;
+        }
+        .p-logo { 
+            text-align: center; font-weight: 800; font-size: 14px; color: #ccc; 
+            padding: 20px; border: 1px solid transparent; 
+        }
+        .p-logo:hover { color: var(--b); border-color: var(--g); opacity: 1; }
 
-        footer { background: var(--b); color: #333; padding: 40px; text-align: center; font-size: 11px; }
+        .hidden { display: none !important; }
+        .no-results { grid-column: 1/-1; text-align: center; padding: 50px; font-weight: bold; color: #999; }
+
+        footer { background: var(--b); color: #555; padding: 50px; text-align: center; font-size: 12px; letter-spacing: 1px; }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo clickable">GWE<span>.</span></div>
+    <div class="logo clickable" onclick="location.reload()">GWE<span>.</span></div>
     <div class="nav">
-        <div class="t-btn active clickable" onclick="v('news', this)">Новости</div>
-        <div class="t-btn clickable" onclick="v('tours', this)">Турниры</div>
-        <div class="t-btn clickable" onclick="v('parts', this)">Партнеры</div>
+        <div class="t-btn active clickable" onclick="switchView('news', this)">Новости</div>
+        <div class="t-btn clickable" onclick="switchView('tours', this)">Турниры</div>
+        <div class="t-btn clickable" onclick="switchView('parts', this)">Партнеры</div>
     </div>
     <div class="s-box">
-        <input type="text" id="mainSearch" placeholder="ПОИСК ПО ВСЕМУ ПОРТАЛУ..." onkeyup="doSearch()">
+        <input type="text" id="mainSearch" placeholder="ПОИСК (Spirit, Major, donk...)" onkeyup="searchEngine()">
     </div>
 </header>
 
-<div class="wrap">
+<div class="wrapper">
     <aside>
         <div class="box">
-            <div class="b-head">Командный рейтинг</div>
-            <div class="item clickable"><span class="g-txt">01</span> Team Spirit</div>
-            <div class="item clickable"><span class="g-txt">02</span> NAVI</div>
-            <div class="item clickable"><span class="g-txt">03</span> FaZe Clan</div>
+            <div class="b-head">Рейтинг команд <small>Обновлено: ПН</small></div>
+            <div class="item clickable" onclick="showModal('Team Spirit', 'Рейтинг: 1000 очков. Последние игры: WWWWW')">
+                <span class="g-txt">01</span> Team Spirit
+            </div>
+            <div class="item clickable" onclick="showModal('NAVI', 'Рейтинг: 950 очков. Последние игры: WWLWW')">
+                <span class="g-txt">02</span> NAVI
+            </div>
+            <div class="item clickable" onclick="showModal('FaZe', 'Рейтинг: 890 очков. Последние игры: LWWWL')">
+                <span class="g-txt">03</span> FaZe Clan
+            </div>
         </div>
         <div class="box">
-            <div class="b-head">Топ Игроков</div>
-            <div class="item clickable"><span class="g-txt">1.42</span> donk</div>
-            <div class="item clickable"><span class="g-txt">1.35</span> m0NESY</div>
+            <div class="b-head">Топ Игроков 2.0</div>
+            <div class="item clickable" onclick="showModal('donk', 'Средний рейтинг: 1.45. MVP на IEM Katowice.')">
+                <span class="g-txt">1.45</span> donk (Spirit)
+            </div>
+            <div class="item clickable" onclick="showModal('m0NESY', 'Средний рейтинг: 1.38. Основной снайпер G2.')">
+                <span class="g-txt">1.38</span> m0NESY (G2)
+            </div>
         </div>
     </aside>
 
     <main>
-        <section id="sec-news" class="sec active">
-            <div class="news-grid" id="container-news">
-                <div class="n-card clickable" onclick="showModal('Spirit победили!', 'Команда Spirit забирает кубок GWE Masters.')">
-                    <div class="n-img"></div>
-                    <div class="n-body"><h3>Spirit забирают финал</h3><p>История грандиозного триумфа...</p></div>
+        <section id="view-news" class="view active">
+            <div class="news-grid">
+                <div class="n-card clickable" onclick="showModal('GWE Masters 2026', 'Подробности грандиозного финала с призовым фондом 1.000.000$')">
+                    <div class="n-img">GWE PREMIER</div>
+                    <div class="n-body">
+                        <h3>Grand Finals: Анонс</h3>
+                        <p>Главное событие года в мире CS2 стартует через две недели.</p>
+                    </div>
                 </div>
-                <div class="n-card clickable" onclick="showModal('Обновление Train', 'Valve вернули легендарную карту Train в пул.')">
-                    <div class="n-img"></div>
-                    <div class="n-body"><h3>Valve вернули Train</h3><p>Патч весом 5ГБ уже доступен...</p></div>
+                <div class="n-card clickable" onclick="showModal('Cloud9 Ростер', 'Команда объявила о возвращении легендарного состава.')">
+                    <div class="n-img">ROSTER NEWS</div>
+                    <div class="n-body">
+                        <h3>Трансферные слухи: C9</h3>
+                        <p>Инсайдеры сообщают о масштабных изменениях в составе.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="sec-tours" class="sec" style="display:none">
-            <div id="container-tours">
-                <div class="box clickable" onclick="showModal('IEM Rio 2026', 'Стадия: Плей-офф. Призовой: 1млн$.')">
-                    <div class="item"><span class="g-txt">LIVE</span> IEM Rio 2026</div>
-                </div>
-                <div class="box clickable" onclick="showModal('GWE Masters', 'Стадия: Регистрация. Вход свободный.')">
-                    <div class="item"><span class="g-txt">REG</span> GWE Masters S4</div>
-                </div>
+        <section id="view-tours" class="view hidden">
+            <div class="box clickable" onclick="showModal('Major Tournament', 'Призовой: 1.250.000$. Место: Лондон.')">
+                <div class="item"><span class="g-txt">MAJOR</span> GWE World Championship</div>
+            </div>
+            <div class="box clickable" onclick="showModal('Summer League', 'Призовой: 50.000$. Открытые квалификации.')">
+                <div class="item"><span class="g-txt">OPEN</span> Summer Grassroot Cup</div>
+            </div>
+        </section>
+
+        <section id="view-parts" class="view hidden">
+            <div class="box" style="padding: 40px; text-align: center;">
+                <h2 style="color:var(--g)">СТАТЬ ПАРТНЕРОМ</h2>
+                <p style="margin: 20px 0;">Ваш бренд может быть здесь.</p>
+                <button class="clickable" style="padding: 15px 30px; background: var(--b); color: var(--w); border: 1px solid var(--g);">ОСТАВИТЬ ЗАЯВКУ</button>
             </div>
         </section>
     </main>
 
     <aside>
         <div class="box">
-            <div class="b-head">LIVE Матчи <span style="color:red">●</span></div>
-            <div class="item clickable" onclick="showModal('Spirit vs FaZe', 'Счет 13:10. Карта: Ancient.')">
+            <div class="b-head">Матчи LIVE <span style="color:red">●</span></div>
+            <div class="item clickable" onclick="showModal('Spirit vs NAVI', 'Карта 2: Mirage. Счет 10:10. Прямой эфир на Twitch.')">
                 <div style="width:100%; display:flex; justify-content:space-between">
-                    <span>Spirit</span> <strong>13:10</strong> <span>FaZe</span>
+                    <span>Spirit</span> <strong class="g-txt">10:10</strong> <span>NAVI</span>
                 </div>
             </div>
         </div>
-        <div class="box" style="border:2px solid var(--g); padding:20px; text-align:center">
-            <span class="g-txt">PREMIUM AD</span><br><small>Your logo here</small>
+        <div class="box" style="height: 350px; background: #000; border: 2px dashed var(--g); display:flex; align-items:center; justify-content:center; text-align:center;">
+            <div style="color:var(--g); font-weight:800; letter-spacing:2px">РЕКЛАМНЫЙ СПОНСОР</div>
         </div>
     </aside>
 </div>
 
+<div class="p-footer">
+    <div class="p-logo clickable">LOGITECH</div>
+    <div class="p-logo clickable">INTEL</div>
+    <div class="p-logo clickable">HELLCASE</div>
+    <div class="p-logo clickable">MONSTER</div>
+    <div class="p-logo clickable">RAZER</div>
+    <div class="p-logo clickable">RED BULL</div>
+</div>
+
 <div id="modal" class="modal" onclick="closeModal()">
     <div class="m-cont" onclick="event.stopPropagation()">
-        <div class="m-close clickable" onclick="closeModal()">&times;</div>
-        <h2 id="m-title" style="margin-bottom:20px; text-transform:uppercase"></h2>
-        <p id="m-text" style="color:#666; line-height:1.6"></p>
-        <button class="clickable" onclick="closeModal()" style="margin-top:30px; padding:10px 20px; background:var(--b); color:var(--w); border:none; width:100%">ЗАКРЫТЬ</button>
+        <span class="m-close clickable" onclick="closeModal()">&times;</span>
+        <h2 id="m-title" style="margin-bottom:20px; text-transform:uppercase; letter-spacing:1px"></h2>
+        <div id="m-text" style="color:#444; font-size: 16px; line-height:1.7; border-left: 3px solid var(--g); padding-left: 20px;"></div>
+        <button class="clickable" onclick="closeModal()" style="margin-top:40px; padding:15px; background:var(--b); color:var(--w); border:none; width:100%; font-weight:bold; letter-spacing:2px">ЗАКРЫТЬ</button>
     </div>
 </div>
 
-<footer>&copy; 2026 GWE PREMIER INTERACTIVE</footer>
+<footer>&copy; 2026 GARNIR WORLD ESPORTS | PREMIUM PORTAL DESIGN</footer>
 
 <script>
-    // Переключение разделов
-    function v(s, btn) {
-        document.querySelectorAll('.sec').forEach(x => x.style.display = 'none');
-        document.querySelectorAll('.t-btn').forEach(x => x.classList.remove('active'));
-        document.getElementById('sec-' + s).style.display = 'block';
+    // ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК
+    function switchView(id, btn) {
+        document.querySelectorAll('.view').forEach(v => v.classList.add('hidden'));
+        document.querySelectorAll('.t-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById('view-' + id).classList.remove('hidden');
         btn.classList.add('active');
     }
 
-    // Модальное окно
+    // МОДАЛЬНОЕ ОКНО
     function showModal(title, text) {
         document.getElementById('m-title').innerText = title;
         document.getElementById('m-text').innerText = text;
@@ -186,36 +229,34 @@
     }
     function closeModal() { document.getElementById('modal').style.display = 'none'; }
 
-    // ПРОРАБОТАННЫЙ ПОИСК
-    function doSearch() {
+    // УМНЫЙ ПОИСК
+    function searchEngine() {
         let q = document.getElementById('mainSearch').value.toLowerCase();
         let items = document.querySelectorAll('.n-card, .item, .box');
         let found = false;
 
         items.forEach(el => {
-            let txt = el.innerText.toLowerCase();
-            if (txt.includes(q)) {
-                el.style.display = "";
+            let text = el.innerText.toLowerCase();
+            if (text.includes(q)) {
+                el.classList.remove('hidden');
                 found = true;
-                // Подсветка (опционально для красоты)
-                if (q.length > 2) el.style.boxShadow = "0 0 10px rgba(197, 160, 89, 0.3)";
-                else el.style.boxShadow = "none";
+                if (q.length > 1) el.style.borderColor = "#c5a059";
+                else el.style.borderColor = "#e0e0e0";
             } else {
-                el.style.display = "none";
+                el.classList.add('hidden');
             }
         });
 
-        // Если ничего не нашли
-        const resultsMsg = document.querySelector('.no-results');
+        const existingMsg = document.querySelector('.no-results');
         if (!found) {
-            if (!resultsMsg) {
+            if (!existingMsg) {
                 let msg = document.createElement('div');
                 msg.className = 'no-results';
-                msg.innerHTML = 'ПО ВАШЕМУ ЗАПРОСУ НИЧЕГО НЕ НАЙДЕНО';
+                msg.innerText = 'НИЧЕГО НЕ НАЙДЕНО ПО ВАШЕМУ ЗАПРОСУ';
                 document.querySelector('main').appendChild(msg);
             }
-        } else if (resultsMsg) {
-            resultsMsg.remove();
+        } else if (existingMsg) {
+            existingMsg.remove();
         }
     }
 </script>
