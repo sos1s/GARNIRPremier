@@ -3,244 +3,275 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GWE | Modern Portal</title>
+    <title>GWE | Ultimate Esports Portal</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-body: #f8f9fa;
+            --bg-page: #f0f2f5;
             --bg-card: #ffffff;
-            --text-main: #1a1a1a;
-            --text-muted: #6c757d;
-            --accent: #0066ff; /* Современный синий */
-            --border-radius: 16px;
-            --shadow: 0 10px 30px rgba(0,0,0,0.05);
+            --accent: #0052ff;
+            --text-dark: #1a1d21;
+            --text-gray: #64748b;
+            --border: #e2e8f0;
+            --radius: 12px;
             --font-main: 'Play', sans-serif;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: var(--font-main);
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            transition: all 0.3s ease;
+            background-color: var(--bg-page);
+            color: var(--text-dark);
+            display: flex; /* Для бокового меню */
+            min-height: 100vh;
         }
 
-        /* Навигация */
-        nav {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            padding: 20px 10%;
+        /* --- БОКОВАЯ ПАНЕЛЬ --- */
+        .sidebar {
+            width: 260px;
+            background: var(--bg-card);
+            border-right: 1px solid var(--border);
+            padding: 30px 20px;
+            position: fixed;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo { font-size: 24px; font-weight: 800; margin-bottom: 40px; color: var(--accent); }
+
+        .nav-menu { list-style: none; flex-grow: 1; }
+        .nav-item {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-gray);
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .nav-item:hover, .nav-item.active {
+            background: #f0f6ff;
+            color: var(--accent);
+        }
+
+        /* --- ОСНОВНОЙ КОНТЕНТ --- */
+        .main-content {
+            margin-left: 260px;
+            padding: 30px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 320px; /* Основная часть + Виджеты */
+            gap: 30px;
+        }
+
+        header {
+            grid-column: 1 / 3;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid #eee;
+            margin-bottom: 20px;
         }
 
-        .logo { font-weight: 700; font-size: 24px; letter-spacing: -1px; }
-        .logo span { color: var(--accent); }
-
-        .nav-tabs {
-            display: flex;
-            gap: 10px;
-            background: #eee;
-            padding: 5px;
-            border-radius: 12px;
-        }
-
-        .tab-btn {
-            border: none;
+        .search-bar {
             padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-family: var(--font-main);
-            font-weight: 600;
-            background: transparent;
-            color: var(--text-muted);
-            transition: 0.3s;
-        }
-
-        .tab-btn.active {
             background: var(--bg-card);
-            color: var(--accent);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            width: 300px;
         }
 
-        /* Основной контент */
-        .container {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 0 20px;
+        /* Секции контента */
+        .content-view { display: none; }
+        .content-view.active { display: block; }
+
+        /* Сетка карточек */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
         }
 
-        .content-section {
-            display: none; /* Скрыты по умолчанию */
-            animation: fadeIn 0.5s ease;
-        }
-
-        .content-section.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Карточки */
         .card {
             background: var(--bg-card);
-            border-radius: var(--border-radius);
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: var(--shadow);
-            border: 1px solid #f0f0f0;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover { transform: translateY(-5px); }
-
-        .card-img {
-            width: 80px;
-            height: 80px;
-            background: #f0f4ff;
-            border-radius: 12px;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-        }
-
-        .card-info h3 { margin-bottom: 5px; font-size: 20px; }
-        .card-info p { color: var(--text-muted); font-size: 14px; }
-
-        /* Сетка партнеров */
-        .partners-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .partner-item {
-            background: white;
-            padding: 40px;
-            text-align: center;
-            border-radius: var(--border-radius);
-            border: 1px solid #eee;
-            filter: grayscale(1);
-            opacity: 0.6;
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--border);
             transition: 0.3s;
         }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
 
-        .partner-item:hover { filter: grayscale(0); opacity: 1; border-color: var(--accent); }
+        .card-thumb { height: 160px; background: #ddd; position: relative; }
+        .badge {
+            position: absolute; top: 10px; left: 10px;
+            background: var(--accent); color: white;
+            padding: 4px 10px; border-radius: 4px; font-size: 10px; font-weight: bold;
+        }
 
-        footer {
-            text-align: center;
-            padding: 60px;
-            color: var(--text-muted);
-            font-size: 14px;
+        .card-body { padding: 20px; }
+        .card-body h3 { font-size: 18px; margin-bottom: 10px; }
+        .card-body p { font-size: 14px; color: var(--text-gray); }
+
+        /* --- ВИДЖЕТЫ (Справа) --- */
+        .widget {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+        }
+        .widget-title { font-weight: 800; text-transform: uppercase; font-size: 12px; margin-bottom: 15px; color: var(--text-gray); }
+
+        .match-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 0; border-bottom: 1px solid #f1f5f9;
+        }
+        .match-row:last-child { border: none; }
+        .team-tag { font-weight: bold; font-size: 14px; }
+        .score-tag { background: #1a1d21; color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px; }
+
+        /* Партнеры - плотная сетка */
+        .partners-mini {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+        }
+        .p-box { 
+            height: 60px; background: #f8fafc; border: 1px solid var(--border); 
+            display: flex; align-items: center; justify-content: center; border-radius: 8px;
+            font-size: 12px; color: var(--text-gray); filter: grayscale(1);
+        }
+
+        @media (max-width: 1100px) {
+            .main-content { grid-template-columns: 1fr; }
+            .sidebar { width: 80px; padding: 20px 10px; }
+            .sidebar .logo, .sidebar span { display: none; }
+            .main-content { margin-left: 80px; }
         }
     </style>
 </head>
 <body>
 
-    <nav>
+    <aside class="sidebar">
         <div class="logo">GWE<span>.</span></div>
-        <div class="nav-tabs">
-            <button class="tab-btn active" onclick="openTab(event, 'news')">Новости</button>
-            <button class="tab-btn" onclick="openTab(event, 'tournaments')">Турниры</button>
-            <button class="tab-btn" onclick="openTab(event, 'partners')">Партнеры</button>
-        </div>
-    </nav>
+        <ul class="nav-menu">
+            <li class="nav-item active" onclick="switchView(event, 'v-news')">
+                <i>🏠</i> <span>Новости</span>
+            </li>
+            <li class="nav-item" onclick="switchView(event, 'v-tour')">
+                <i>🏆</i> <span>Турниры</span>
+            </li>
+            <li class="nav-item" onclick="switchView(event, 'v-part')">
+                <i>🤝</i> <span>Партнеры</span>
+            </li>
+        </ul>
+        <div class="nav-item" style="margin-top: auto;"><i>⚙️</i> <span>Настройки</span></div>
+    </aside>
 
-    <div class="container">
-        
-        <section id="news" class="content-section active">
-            <h2 style="margin-bottom: 25px;">Свежие события</h2>
-            <div class="card">
-                <div class="card-img">🔥</div>
-                <div class="card-info">
-                    <h3>Новый сезон GWE Premier</h3>
-                    <p>Анонсирован призовой фонд в размере $50,000. Регистрация открывается в понедельник.</p>
+    <div class="main-content">
+        <header>
+            <h1>Панель управления</h1>
+            <input type="text" class="search-bar" placeholder="Поиск новостей или матчей...">
+        </header>
+
+        <section id="v-news" class="content-view active">
+            <div class="grid-container">
+                <div class="card">
+                    <div class="card-thumb"><div class="badge">HOT</div></div>
+                    <div class="card-body">
+                        <h3>Spirit выходят в финал</h3>
+                        <p>Невероятный камбэк на карте Mirage обеспечил команде слот...</p>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="card-img">📢</div>
-                <div class="card-info">
-                    <h3>Изменения в составе Cloud9</h3>
-                    <p>Анализируем последние трансферы перед стартом квалификаций.</p>
+                <div class="card">
+                    <div class="card-thumb"></div>
+                    <div class="card-body">
+                        <h3>Обновление карт</h3>
+                        <p>Valve официально заменили Vertigo на новую версию Train...</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-thumb"></div>
+                    <div class="card-body">
+                        <h3>GWE Spring Cup</h3>
+                        <p>Открыта регистрация для команд из СНГ региона...</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="tournaments" class="content-section">
-            <h2 style="margin-bottom: 25px;">Активные турниры</h2>
-            <div class="card">
-                <div class="card-img" style="background: #e6fffa; color: #2d3748;">🏆</div>
-                <div class="card-info">
-                    <h3>Winter Masters 2026</h3>
-                    <p>Статус: <b>Групповой этап</b> | Призовой: $10,000</p>
+        <section id="v-tour" class="content-view">
+            <div class="grid-container">
+                <div class="card">
+                    <div class="card-body">
+                        <div style="color: green; font-weight: bold; font-size: 12px;">LIVE</div>
+                        <h3>Pro League S5</h3>
+                        <p>Призовой: $100,000</p>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="card-img" style="background: #fffaf0;">🕒</div>
-                <div class="card-info">
-                    <h3>GWE Community Cup #12</h3>
-                    <p>Статус: <b>Регистрация</b> | Участие бесплатное</p>
+                <div class="card">
+                    <div class="card-body">
+                        <div style="color: var(--text-gray); font-weight: bold; font-size: 12px;">UPCOMING</div>
+                        <h3>Major Qualifiers</h3>
+                        <p>Призовой: Слот на Major</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="partners" class="content-section">
-            <h2 style="margin-bottom: 25px;">Наши партнеры</h2>
-            <div class="partners-grid">
-                <div class="partner-item">Partner 1</div>
-                <div class="partner-item">Partner 2</div>
-                <div class="partner-item">Partner 3</div>
-                <div class="partner-item">Partner 4</div>
+        <section id="v-part" class="content-view">
+            <div class="partners-mini" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="p-box">PARTNER A</div>
+                <div class="p-box">PARTNER B</div>
+                <div class="p-box">PARTNER C</div>
+                <div class="p-box">PARTNER D</div>
+                <div class="p-box">PARTNER E</div>
             </div>
         </section>
 
+        <aside>
+            <div class="widget">
+                <div class="widget-title">Текущие матчи</div>
+                <div class="match-row">
+                    <span class="team-tag">SPIRIT</span>
+                    <span class="score-tag">2:1</span>
+                    <span class="team-tag">FAZE</span>
+                </div>
+                <div class="match-row">
+                    <span class="team-tag">NAVI</span>
+                    <span class="score-tag">12:10</span>
+                    <span class="team-tag">G2</span>
+                </div>
+            </div>
+
+            <div class="widget">
+                <div class="widget-title">Наши партнеры</div>
+                <div class="partners-mini">
+                    <div class="p-box">Logitech</div>
+                    <div class="p-box">Red Bull</div>
+                    <div class="p-box">Intel</div>
+                    <div class="p-box">Nvidia</div>
+                </div>
+            </div>
+        </aside>
     </div>
 
-    <footer>
-        &copy; 2026 Garnir World Esports. All rights reserved.
-    </footer>
-
     <script>
-        function openTab(evt, tabName) {
-            var i, content, tablinks;
-
-            // Скрываем все секции
-            content = document.getElementsByClassName("content-section");
-            for (i = 0; i < content.length; i++) {
-                content[i].classList.remove("active");
-            }
-
-            // Убираем класс active у всех кнопок
-            tablinks = document.getElementsByClassName("tab-btn");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].classList.remove("active");
-            }
-
-            // Показываем нужную секцию и добавляем класс active кнопке
-            document.getElementById(tabName).classList.add("active");
+        function switchView(evt, viewId) {
+            var i, views, items;
+            views = document.getElementsByClassName("content-view");
+            for (i = 0; i < views.length; i++) { views[i].classList.remove("active"); }
+            
+            items = document.getElementsByClassName("nav-item");
+            for (i = 0; i < items.length; i++) { items[i].classList.remove("active"); }
+            
+            document.getElementById(viewId).classList.add("active");
             evt.currentTarget.classList.add("active");
         }
     </script>
-
 </body>
 </html>
